@@ -37,6 +37,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.compras',
+    'apps.articulos',
+    'apps.usuarios',
+    'apps.personas'
 ]
 
 MIDDLEWARE = [
@@ -77,8 +81,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'localhost/ORCLCDB.localdomain',
-        'USER': 'too',
-        'PASSWORD': 'too',
+        'USER': 'kevint',
+        'PASSWORD': 'localhost',
     }
 }
 
