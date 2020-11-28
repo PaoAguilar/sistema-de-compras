@@ -42,3 +42,12 @@ def departamento_edit(request, id_depto):
         depto.save()
         messages.success(request, '2')
         return redirect('indexDepartamento')
+
+
+def departamento_eliminar(request, id_depto):
+    if request.method == 'GET':
+        depto = Departamento.objects.get(id=id_depto)
+        depto.delete()
+        messages.success(request, '3')
+
+    return redirect('indexDepartamento')

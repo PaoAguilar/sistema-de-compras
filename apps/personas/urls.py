@@ -7,4 +7,6 @@ urlpatterns = [
     path('departamento/crear/', departamento_create, name='departamento_crear'),
     path('departamento/editar/<int:id_depto>/',
          departamento_edit, name='departamento_editar'),
+    path('departamento/<int:id_depto>/eliminar/',
+         departamento_eliminar, name='departamento_eliminar'),
 ]
