@@ -50,7 +50,7 @@ $(document).ready(function() {
         case '3':
             Swal.fire(
                 'Departamento',
-                "Eliminada con exito!",
+                "Eliminado con exito!",
                 'success'
             );
             break;

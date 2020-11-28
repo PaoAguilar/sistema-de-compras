@@ -23,3 +23,22 @@ def departamento_create(request):
     else:
 
         return render(request, 'departamentos/ingresar.html')
+
+
+def departamento_edit(request, id_depto):
+    depto = Departamento.objects.get(id=id_depto)
+    if request.method == 'GET':
+
+        contexto = {'departamento': depto}
+        return render(request, 'departamentos/editar.html', contexto)
+
+    elif request.method == 'POST':
+
+        cod = request.POST.get('codigo')
+        nombre = request.POST.get('nombre')
+
+        depto.codigo = cod
+        depto.nombre = nombre
+        depto.save()
+        messages.success(request, '2')
+        return redirect('indexDepartamento')
