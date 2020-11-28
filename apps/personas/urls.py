@@ -4,4 +4,5 @@ from apps.personas.views import *
 urlpatterns = [
     # URLS QUE MANEJAN LOS DEPARTAMENTOS
     path('departamento/', indexDepartamento, name='indexDepartamento'),
+    path('departamento/crear/', departamento_create, name='departamento_crear'),
 ]
