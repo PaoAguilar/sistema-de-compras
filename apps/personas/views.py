@@ -1,10 +1,13 @@
 from django.shortcuts import render, redirect
 from apps.personas.models import *
+from django.contrib import messages
 # Create your views here.
 
 
 def indexDepartamento(request):
-    return render(request, 'departamentos/index.html')
+    departamentosregistrados = Departamento.objects.all()
+    contexto = {'departamentos': departamentosregistrados}
+    return render(request, 'departamentos/index.html', contexto)
 
 
 def departamento_create(request):
@@ -15,6 +18,7 @@ def departamento_create(request):
         new_departamento.codigo = cod
         new_departamento.nombre = nombre
         new_departamento.save()
+        messages.success(request, '1')
         return redirect('indexDepartamento')
     else:
 
