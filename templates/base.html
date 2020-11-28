@@ -1,0 +1,76 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <!-- REQUIRED SCRIPTS -->
+
+    <!-- jQuery -->
+    <script src="{% static 'plugins/jquery/jquery.min.js'%}"></script>
+    <!-- Bootstrap -->
+    <script src="{% static 'plugins/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+    <!-- AdminLTE -->
+    <script src="{% static 'dist/js/adminlte.js' %}"></script>
+    <!-- jQuery-ui -->
+    <script src="{% static 'plugins/jquery-ui/jquery-ui.min.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'plugins/jquery-ui/jquery-ui.css' %}" media="all" />
+
+    <script src="{% static 'plugins/inputmask/min/jquery.inputmask.bundle.min.js' %}"></script>
+
+     <!-- SWEET ALERTS2 -->
+     <script src="{% static 'plugins/sweetalert2/sweetalert2.min.js' %}"></script>
+     <link rel="stylesheet" href="{% static 'plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+
+
+    <!-- DATA TABLES -->
+    <link rel="stylesheet" href="{% static '/plugins/datatables-bs4/css/dataTables.bootstrap4.css' %}">
+    <script src="{% static 'plugins/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'plugins/datatables/jquery.dataTables.js' %}"></script>
+    <script src="{% static 'plugins/datatables-bs4/js/dataTables.bootstrap4.js' %}"></script>
+    <script src="{% static 'plugins/datatables-fixedheader/js/dataTables.fixedHeader.min.js' %}"></script>
+    <script src="{% static 'dist/js/jquery.PrintArea.js' %}"></script>
+    <link rel="stylesheet" href="{% static 'plugins/sweetalert2-theme-bootstrap-4/bootstrap-4.min.css' %}">
+    <link  rel="stylesheet" src="{% static 'plugins/datatables-fixedheader/css/fixedHeader.bootstrap4.css' %}"></script>
+
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
+    <script src="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/js/select2.min.js"></script>
+
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{% static 'plugins/fontawesome-free/css/all.min.css' %}">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="http://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{% static 'dist/css/adminlte.min.css' %}">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <!--  Para importar librerias individualmente en cada template  -->
+    {% block header %} {% endblock %}
+
+    <title>Sistema de Compras</title>
+</head>
+<body class="hold-transition sidebar-mini layout-fixed">
+
+    <!-- Navbar -->
+    {% include 'particiones/_navbar.html' %}
+    <!-- Sidebar -->
+    {% include 'particiones/_sidebar.html' %}
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main Content -->
+        {% block content %} {% endblock %}
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Footer -->
+    {% include 'particiones/_footer.html' %}
+
+
+</body>
+</html>
