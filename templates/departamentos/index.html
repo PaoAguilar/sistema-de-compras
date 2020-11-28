@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<script src="{% static 'dist/js/jsdepartamento/indexDepartamento.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<!-- Varible que dispara los sweet alerts -->
+<ul>
+    {% for message in messages %}
+    <input type="text" name="opt" id="opt" value="{{ message }}" hidden>
+    {% endfor %}
+</ul>
+<!-- Varible que dispara los sweet alerts fin -->
+{% endif %}
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-10 offset-1">
+        <div class="card card-dark">
+            <div class="card-header">
+                Listado de departamentos
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2 offset-lg-10 text-right">
+                        <a class="btn btn-info" href="" role="button"> <i class="fa fa-plus"
+                                aria-hidden="true"></i>
+                            Agregar</a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <div class="table-responsive">
+                            <table class="table display table-bordered table-striped" name="indexDepartamento"
+                                id="indexDepartamento">
+                                <thead class="bg-secondary">
+                                    <tr>
+
+                                        <td>Código de departamento</td>
+                                        <td>Nombre del departamento</td>
+                                        <td>Opciones</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
