@@ -1,21 +1,8 @@
 $(document).ready(function() {
 
     resultado = $('#opt').val();
-    $('#tablaExpedientes thead tr').clone(true).appendTo( '#tablaExpedientes thead' );
-    $('#tablaExpedientes thead tr:eq(1) th').each( function (i) {
-        var title = $(this).text();
-        $(this).html( '<input type="text" placeholder="Buscar '+title+'" />' );
- 
-        $( 'input', this ).on( 'keyup change', function () {
-            if ( table.column(i).search() !== this.value ) {
-                table
-                    .column(i)
-                    .search( this.value )
-                    .draw();
-            }
-        } );
-    } );
-    var table = $('#tablaExpedientes').DataTable( {
+    
+    $('#indexArticulo').DataTable( {
         orderCellsTop: true,
         fixedHeader: true,
         "language": {
@@ -45,30 +32,29 @@ $(document).ready(function() {
 
     } );
 
-
     switch (resultado) {
         case '1':
             Swal.fire(
-                'Expediente',
-                "Se ha creado con exito!",
+                'Articulo',
+                "Se ha creado con exito el articulo",
                 'success'
             );
             break;
         case '2':
             Swal.fire(
-                'Expediente',
-                "Se actualizo con exito!",
+                'Articulo',
+                "Se actualizo con exito el articulo",
                 'success'
             );
             break;
         case '3':
             Swal.fire(
-                'Expediente',
+                'Articulo',
                 "Eliminado con exito!",
                 'success'
             );
             break;
-       
     } 
-  
 });
+
+
