@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-8 offset-2 ">
+            <div class="card card-info">
+
+                <div class="card-header with-border">
+                    <h5>Permisos</h5>
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Nombre</span>
+                                        </div>
+                                        {{ form.as_p }}
+                                    </div>
+                                </div>
+                                <!-- <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Nombre en Código</span>
+                                        </div>
+                                        {{ form.codename }}
+                                    </div>
+                                </div> -->
+                                <div class="row">
+                                    <div class="col-lg-4 offset-lg-7 text-right">
+                                        <a href="{% url 'list_permission' %}" role="button"
+                                           class="btn btn-danger">Cancelar</a>
+                                        <button class="btn btn-info">Crear</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
