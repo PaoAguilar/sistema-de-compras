@@ -27,7 +27,7 @@
             <div class="card-body">
                 <div class="row">
                     <div class="col-lg-2 offset-lg-10 text-right">
-                        <a class="btn btn-info" href="" role="button"> <i class="fa fa-plus"
+                        <a class="btn btn-info" href="{% url 'empleado_crear' %}" role="button"> <i class="fa fa-plus"
                                 aria-hidden="true"></i>
                             Agregar</a>
                     </div>
@@ -42,13 +42,31 @@
                                     <tr>
                                         <td>Nombre del empleado</td>
                                         <td>Genero</td>
-                                        <td>Edad</td>
-                                        <td>Cargo</td>
+                                        <td>Pertenece al Departamento</td>                                     
                                         <td>Telefono</td>
                                         <td>Opciones</td>
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    {% if empleados %}
+                                    {% for empleado in empleados %}
+                                    <tr>
+                                        <td> {{ empleado.primer_nombre }} {{ empleado.segundo_nombre }}
+                                            {{ empleado.primer_apellido }} {{ empleado.segundo_apellido }}
+                                        </td>
+                                        <td> {{ empleado.genero }}</td>
+                                        <td> {{ empleado.id_departamento.nombre }}</td>
+                                        <td> {{ empleado.telefono }}</td>
+                                        <td>
+                                            <a href=""
+                                                class="btn btn-sm btn-success">Actualizar</a>
+                                            <a href=""
+                                                class="btn btn-sm btn-secondary">Detalles</a>
+                                            <a id="eliminar" name="eliminar" class="btn btn-sm btn-danger">Eliminar</a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
                                 </tbody>
                             </table>
                         </div>

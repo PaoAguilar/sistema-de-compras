@@ -12,5 +12,5 @@ urlpatterns = [
 
     # URLS QUE MANEJAN LOS EMPLEADOS
     path('empleado/', indexEmpleado, name='indexEmpleado'),
-
+    path('empleado/crear/', empleado_create, name='empleado_crear'),
 ]
