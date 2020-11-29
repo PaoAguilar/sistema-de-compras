@@ -1,0 +1,39 @@
+{% extends 'base.html' %}
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-8 offset-2 ">
+            <div class="card card-danger">
+
+                <div class="card-header with-border">
+                    Eliminación de Usuario
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="post">
+                                {% csrf_token %}
+                                <center><h2>¿Desea eliminar al Grupo "{{ object }}"?</h2></center>
+                              <div class="row">
+                        <div class="col-lg-4 offset-lg-7 text-right">
+                            <a href="{% url 'list_group' %}" role="button" class="btn btn-info">Cancelar</a>
+                            <button type="submit " name="button" class="btn btn-outline-danger" > Confirmar </button>
+                        </div>
+                    </div>
+                            </form>
+
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+{% endblock %}

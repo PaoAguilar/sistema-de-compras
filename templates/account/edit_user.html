@@ -1,0 +1,129 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/css/bootstrap-select.css"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.1/js/bootstrap-select.min.js"></script>
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-8 offset-2 ">
+            <div class="card card-info">
+
+                <div class="card-header with-border">
+                    Editar usuario
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="post">
+                                {% csrf_token %}
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Usuario</span>
+                                        </div>
+                                        {{ form.username }}
+                                    </div>
+                                </div>
+                                {% if form.errors.username %}
+                                <div class=" alert alert-danger col-lg-10 offset-lg-1" role="alert">
+                                    {% for error in form.errors.username %}
+                                    {{ error }}
+                                    {%endfor%}
+                                </div>
+                                {% endif %}
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Nombres</span>
+                                        </div>
+                                        {{ form.first_name }}
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Apellidos</span>
+                                        </div>
+                                        {{ form.last_name }}
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">e-mail</span>
+                                        </div>
+                                        {{ form.email }}
+                                    </div>
+                                </div>
+                                {% if form.errors.email %}
+                                <div class=" alert alert-danger col-lg-10 offset-lg-1" role="alert">
+                                    {% for error in form.errors.email %}
+                                    {{ error }}
+                                    {%endfor%}
+                                </div>
+                                {% endif %}
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Grupo</span>
+                                        </div>
+                                        <select name="groups" id="id_groups" class="form-control selectpicker" multiple>
+                                            {% for grupo in form.groups %}
+                                            {{grupo}}
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-10 offset-lg-1  form-check">
+                                        <label class="form-check-label">
+                                            {{ form.is_superuser }}
+                                            Es superusuario
+                                        </label>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10 offset-lg-1  form-check">
+                                        <label class="form-check-label">
+                                            {{ form.is_active }}
+                                            Es activo
+                                        </label>
+                                    </div>
+                                </div>
+                                {% comment %} <div class="row">
+                                    <div class="col-lg-4 offset-lg-7 text-right">
+                                        <a href="#" class="btn btn-link">Cambiar contraseña</a>
+
+                                    </div>
+                                </div> {% endcomment %}
+
+                                <div class="row">
+                                    <div class="col-lg-4 offset-lg-7 text-right">
+                                        <a href="{% url 'list_user' %}" role="button"
+                                           class="btn btn-danger">Cancelar</a>
+                                        <button type="submit" class="btn btn-info">Guardar</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
