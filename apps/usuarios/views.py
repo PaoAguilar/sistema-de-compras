@@ -6,9 +6,16 @@ from django.conf import settings
 from django.utils.crypto import get_random_string
 from django.shortcuts import render, redirect
 from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
+from django.contrib.messages.views import SuccessMessageMixin
+from django.urls import reverse_lazy
+from django.contrib.auth.models import User, Group, Permission
 
 from .forms import(
-    SignUpForm
+    SignUpForm,
+    UserCreateFormNew,
+    UserForm,
+    AssignGroup,
+    AssignPermissionForm
 )
 # Create your views here.
 
@@ -55,3 +62,89 @@ class SignUpView(VisitaView, FormView):
             messages.success(request, _('Te has registrado correctamente!'))
 
         return redirect('login')
+
+class UserList(ListView):
+    model = User
+    template_name = 'account/list_user.html'
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+
+class UserDelete(SuccessMessageMixin, DeleteView):
+    model = User
+    template_name = 'account/delete_user.html'
+    success_message = "Se Elimino el usuario con exito"
+    success_url = reverse_lazy('list_user')
+
+
+class UserUpdate(SuccessMessageMixin, UpdateView):
+    model = User
+    form_class = UserForm
+    template_name = 'account/edit_user.html'
+    success_message = "Se Actualizo el usuario con exito"
+    success_url = reverse_lazy('list_user')
+
+
+class UserCreate(SuccessMessageMixin, CreateView):
+    model = User
+    template_name = 'account/create_user.html'
+    form_class = UserCreateFormNew
+    success_message = "Se creo con exito el usuario."
+    success_url = reverse_lazy('list_user')
+
+class CreateGroupView(CreateView):
+    template_name = 'account/create_group.html'
+    form_class = AssignGroup
+    success_url = reverse_lazy('list_group')
+
+
+class ListGroupView(ListView):
+    template_name = 'account/list_group.html'
+    model = Group
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+
+class DeleteGroupView(SuccessMessageMixin, DeleteView):
+    model = Group
+    template_name = 'account/delete_group.html'
+    success_message = "Se Elimino el grupo con exito"
+    success_url = reverse_lazy('list_group')
+
+
+class UpdateGroupView(SuccessMessageMixin, UpdateView):
+    model = Group
+    form_class = AssignGroup
+    template_name = 'account/edit_group.html'
+    success_message = "Se Actualizo el grupo con exito"
+    success_url = reverse_lazy('list_group')
+
+class CreatePermissionView(CreateView):
+    template_name = 'account/create_permission.html'
+    form_class = AssignPermissionForm
+    success_url = reverse_lazy('list_permission')
+
+
+class ListPermissionView(ListView):
+    template_name = 'account/list_permission.html'
+    model = Permission
+
+    def get_queryset(self):
+        return self.model.objects.all()
+
+
+class DeletePermissionView(SuccessMessageMixin, DeleteView):
+    model = Permission
+    template_name = 'account/delete_permission.html'
+    success_message = "Se Elimino el Permiso con exito"
+    success_url = reverse_lazy('list_permission')
+
+
+class UpdatePermissionView(SuccessMessageMixin, UpdateView):
+    model = Permission
+    form_class = AssignPermissionForm
+    template_name = 'account/edit_permission.html'
+    success_message = "Se Actualizo el permiso con exito"
+    success_url = reverse_lazy('list_permission')

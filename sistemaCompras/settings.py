@@ -127,6 +127,9 @@ DISABLE_USERNAME = False
 ENABLE_USER_ACTIVATION = True
 SIGN_UP_FIELDS = ['username', 'first_name',
                   'last_name', 'email', 'password1', 'password2']
+
+CREATE_FIELDS = ['username', 'first_name', 'last_name',
+                 'email', 'groups', 'password1', 'password2']                  
 LOGIN_REDIRECT_URL = 'home'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'

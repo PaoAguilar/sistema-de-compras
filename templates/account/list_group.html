@@ -1,0 +1,83 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<script src="{% static 'dist/js/jsaccounts/indexAccounts.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<!-- Varible que dispara los sweet alerts -->
+<ul>
+    {% for message in messages %}
+    <input type="text" name="opt" id="opt" value="{{ message }}" hidden>
+    {% endfor %}
+</ul>
+<!-- Varible que dispara los sweet alerts fin -->
+
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row">
+        <div class="col-11 offset-1">
+            <div class="card card-info">
+                <div class="card-header">
+                    <h5>Listado de Grupos</h5>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-lg-3 offset-lg-8 text-right">
+                            <a class="btn btn-primary" href="{% url 'create_group' %}" role="button">
+                                <i class="fa fa-plus" aria-hidden="true"></i> Nuevo Grupo</a>
+                        </div>
+                    </div>
+                    <br>
+                    {% if messages %}
+                    <div class="row ">
+                        <div class="col-lg-10 offset-lg-1 alert alert-success">
+                            {% for message in messages %}
+                            {{ message }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endif %}
+                    <div class="row">
+                        <div class="col-lg-10 offset-lg-1">
+                            {% if messages %}
+                            <ul class="messages">
+
+                            </ul>
+                            {% endif %}
+                            <div class="table-responsive">
+                                <table class="table table-bordered table-striped" id="tableAccounts"
+                                    name="tableAccounts">
+                                    <thead class="bg-info">
+                                        <tr>
+
+                                            <td>Nombre</td>
+                                            <td>Opciones</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        {% for Group in object_list%}
+                                        <tr>
+
+                                            <td>{{Group.name}}</td>
+
+                                            <td><a href="{% url 'update_group' Group.id %}"
+                                                    class="btn btn-sm btn-success">Editar</a>
+                                                <a href="{% url 'delete_group' Group.id %}"
+                                                    class="btn btn-sm btn-danger">Eliminar</a>
+                                            </td>
+                                        </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endblock %}
