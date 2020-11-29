@@ -9,4 +9,8 @@ urlpatterns = [
          departamento_edit, name='departamento_editar'),
     path('departamento/<int:id_depto>/eliminar/',
          departamento_eliminar, name='departamento_eliminar'),
+
+    # URLS QUE MANEJAN LOS EMPLEADOS
+    path('empleado/', indexEmpleado, name='indexEmpleado'),
+
 ]
