@@ -37,10 +37,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'apps.personas',
     'apps.compras',
     'apps.articulos',
-    'apps.usuarios',
-    'apps.personas'
+    'apps.usuarios'
+  
 ]
 
 MIDDLEWARE = [
@@ -81,8 +82,8 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
         'NAME': 'localhost/ORCLCDB.localdomain',
-        'USER': 'too',
-        'PASSWORD': 'too',
+        'USER': 'kevint',
+        'PASSWORD': 'localhost',
     }
 }
 
@@ -122,7 +123,11 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-
+DISABLE_USERNAME = False  
+ENABLE_USER_ACTIVATION = True
+SIGN_UP_FIELDS = ['username', 'first_name',
+                  'last_name', 'email', 'password1', 'password2']
+LOGIN_REDIRECT_URL = 'home'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [
