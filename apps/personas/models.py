@@ -2,20 +2,38 @@ from django.db import models
 from django.contrib.auth.models import User
 # Create your models here.
 
-class Direccion(models.Model):
-    #id default
-    direccion = models.CharField(max_length=256)
-    municipio = models.CharField(max_length=50)
-    departamento = models.CharField(max_length=50)
+class Depa(models.Model):
+    # id default
+    nombreDepartamento = models.CharField(max_length=250)
+
 
     class Meta:
-        db_table = 'Direccion'
-        verbose_name = 'Direccion'
-        verbose_name_plural = 'Direcciones'
+        db_table = 'Depa'
+        verbose_name = 'Depa'
+        verbose_name_plural = 'Depas'
         default_permissions = []
 
-    def __str__(self):
-        return '%s' % (self.direccion)
+
+
+        def _str_(self):
+            return '%s' % (self.concepto)
+
+class Municipio(models.Model):
+    # id default
+    departamento_id = models.ForeignKey(Depa, on_delete=models.CASCADE)
+    nombreMunicipio = models.CharField(max_length=250)
+
+    class Meta:
+        db_table = 'Municipio'
+        verbose_name = 'Municipio'
+        verbose_name_plural = 'Municipios'
+        default_permissions = []
+
+
+
+        def _str_(self):
+            return '%s' % (self.concepto)
+
 
 class Departamento(models.Model):
     #id default
@@ -37,14 +55,18 @@ class Empleado(models.Model):
     primer_nombre = models.CharField(max_length=50)
     segundo_nombre = models.CharField(max_length=50)
     primer_apellido = models.CharField(max_length=50)
-    segundo_nombre = models.CharField(max_length=50)
+    segundo_apellido = models.CharField(max_length=50)
     genero = models.CharField(max_length=25)
-    edad = models.IntegerField()
+    fecha_nacimiento = models.DateField()
+    fecha_contratacion = models.DateField()
+    direccion = models.TextField()
+    dui = models.CharField(max_length=9)
+    nit = models.CharField(max_length=16)
     telefono = models.CharField(max_length=25)
     auth_id = models.OneToOneField(User, on_delete = models.CASCADE, default=0)
-    id_direccion = models.OneToOneField(Direccion, on_delete= models.CASCADE, db_column='id_direccion') # definir relacion uno a uno 
     id_departamento = models.ForeignKey(Departamento, on_delete= models.CASCADE, db_column='id_departamento')
-
+    depa_id = models.ForeignKey(Depa, on_delete=models.CASCADE, default = 0, db_column='id_depa')
+    municipio_id = models.ForeignKey(Municipio, on_delete=models.CASCADE, default = 0, db_column='id_municipio')
     
     class Meta:
         db_table = 'Empleado'
@@ -60,7 +82,9 @@ class EmpresaProvedora(models.Model):
     auth_id = models.OneToOneField(User, on_delete= models.CASCADE)
     nombre = models.CharField(max_length= 25)
     telefono = models.CharField(max_length=25)
-    id_direccion = models.OneToOneField(Direccion, on_delete= models.CASCADE)
+    depa_id = models.ForeignKey(Depa, on_delete=models.CASCADE, default = 0, db_column='id_depa')
+    municipio_id = models.ForeignKey(Municipio, on_delete=models.CASCADE, default = 0, db_column='id_municipio')
+    direccion = models.TextField()
 
     class Meta:
         db_table = 'Empresa Proveedora'
