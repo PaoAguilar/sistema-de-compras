@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'apps.compras',
     'apps.articulos',
     'apps.usuarios'
-  
+
 ]
 
 MIDDLEWARE = [
@@ -125,13 +125,13 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/2.2/howto/static-files/
-DISABLE_USERNAME = False  
+DISABLE_USERNAME = False
 ENABLE_USER_ACTIVATION = True
 SIGN_UP_FIELDS = ['username', 'first_name',
                   'last_name', 'email', 'password1', 'password2']
 
 CREATE_FIELDS = ['username', 'first_name', 'last_name',
-                 'email', 'groups', 'password1', 'password2']                  
+                 'email', 'groups', 'password1', 'password2']
 LOGIN_REDIRECT_URL = 'home'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'

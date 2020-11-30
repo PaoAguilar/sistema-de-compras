@@ -3,6 +3,8 @@ from apps.personas.models import *
 from django.contrib import messages
 # Create your views here.
 
+####################################### DEPARTAMENTOS ####################################
+
 
 def indexDepartamento(request):
     departamentosregistrados = Departamento.objects.all()
@@ -115,3 +117,8 @@ def empresaProveedora_eliminar(request, id_proveedor):
         messages.success(request, '3')
 
     return redirect('indexEmpresaProveedora')
+####################################### EMPLEADOS ####################################
+
+
+def indexEmpleado(request):
+    return render(request, 'empleados/index.html')
