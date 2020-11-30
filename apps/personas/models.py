@@ -79,12 +79,12 @@ class Empleado(models.Model):
 
 class EmpresaProvedora(models.Model):
     #id default
-    auth_id = models.OneToOneField(User, on_delete= models.CASCADE)
     nombre = models.CharField(max_length= 25)
     telefono = models.CharField(max_length=25)
+    direccion = models.TextField()
+    auth_id = models.OneToOneField(User, on_delete= models.CASCADE)
     depa_id = models.ForeignKey(Depa, on_delete=models.CASCADE, default = 0, db_column='id_depa')
     municipio_id = models.ForeignKey(Municipio, on_delete=models.CASCADE, default = 0, db_column='id_municipio')
-    direccion = models.TextField()
 
     class Meta:
         db_table = 'Empresa Proveedora'

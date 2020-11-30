@@ -62,25 +62,32 @@ def indexEmpresaProveedora(request):
 
 def empresaProveedora_create(request):
     if request.method == 'POST':
-        user_id = request.POST.get('user_id')
-        depa_id = request.POST.get('depa_id')
-        municipio_id = request.POST.get('municipio_id')
+        usersis = request.POST.get('usersis')
+        dep = request.POST.get('departamento')
+        muni = request.POST.get('municipio')
         nombre = request.POST.get('nombre')
         telefono = request.POST.get('telefono')
         direccion = request.POST.get('direccion')
         new_empresaProveedora = EmpresaProvedora()
-        new_empresaProveedora.auth_id = user_id
-        new_empresaProveedora.depa_id = depa_id
-        new_empresaProveedora.municipio_id = municipio_id
+        new_empresaProveedora.auth_id_id = usersis
+        new_empresaProveedora.depa_id_id = dep
+        new_empresaProveedora.municipio_id_id = muni
         new_empresaProveedora.nombre = nombre
         new_empresaProveedora.telefono = telefono
         new_empresaProveedora.direccion = direccion
+        
         new_empresaProveedora.save()
         messages.success(request, '1')
         return redirect('indexEmpresaProveedora')
     else:
-
-        return render(request, 'empresaProveedora/ingresar.html')
+        usersdispo = User.objects.exclude(
+            id__in=EmpresaProvedora.objects.order_by().values('auth_id_id').distinct())
+        depart = Depa.objects.all()
+        muni = Municipio.objects.all()
+        contexto = {'usuarios': usersdispo,
+                    'departamentos': depart,
+                    'municipios': muni}
+        return render(request, 'empresaProveedora/ingresar.html', contexto)
 
 
 def empresaProveedora_edit(request, id_proveedor):
@@ -99,9 +106,9 @@ def empresaProveedora_edit(request, id_proveedor):
         telefono = request.POST.get('telefono')
         direccion = request.POST.get('direccion')
 
-        proveedor.auth_id = user_id
-        proveedor.depa_id = depa_id
-        proveedor.municipio_id = municipio_id
+        proveedor.auth_id_id = user_id
+        proveedor.depa_id_id = depa_id
+        proveedor.municipio_id_id = municipio_id
         proveedor.nombre = nombre
         proveedor.telefono = telefono
         proveedor.direccion = direccion

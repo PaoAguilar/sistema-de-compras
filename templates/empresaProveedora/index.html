@@ -40,7 +40,6 @@
                                 id="indexEmpresaProveedora">
                                 <thead class="bg-secondary">
                                     <tr>
-
                                         <td>Nombre Proveedor</td>
                                         <td>Telefono Proveedor</td>
                                         <td>Direccion</td>
@@ -49,8 +48,8 @@
                                 </thead>
                                 <tbody>
 
-                                    {% if empresasProvedoras %}
-                                    {% for proveedor in empresasProvedoras %}
+                                    {% if empresasProveedoras %}
+                                    {% for proveedor in empresasProveedoras %}
                                     <tr>
                                         <td> {{ proveedor.nombre }}</td>
                                         <td> {{ proveedor.telefono }}</td>

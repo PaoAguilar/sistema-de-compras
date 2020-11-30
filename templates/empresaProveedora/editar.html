@@ -26,19 +26,74 @@
                                 <div class="row form-group">
                                     <div class="input-group col-lg-10 offset-lg-1 ">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">Código</span>
+                                            <span class="input-group-text">Nombre proveedor</span>
                                         </div>
-                                        <input type="text" class="form-control" id="codigo" name="codigo" value="{{ departamento.codigo }}">
+                                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ empresaProveedora.nombre }}" required>
                                     </div>
-                                </div>
+                                </div>   
                                 <div class="row form-group">
                                     <div class="input-group col-lg-10 offset-lg-1 ">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">Nombre</span>
+                                            <span class="input-group-text">Telefono</span>
                                         </div>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ departamento.nombre }}">
+                                        <input type="number" class="form-control" id="telefono" name="telefono" value="{{ empresaProveedora.telefono }}" required>
+                                    </div>
+                                </div> 
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Dirección</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="direccion" name="direccion"
+                                            placeholder="Ingrese la dirección" value="{{ empresaProveedora.direciion }}" required>
                                     </div>
                                 </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Departamento</span>
+                                        </div>
+                                        <select class="custom-select" id="departamento" name="departamento" required>
+                                            <option value="" selected disabled>Elija el departamento</option>
+                                            {% if departamentos %}
+                                            {% for depart in departamentos %}
+                                            <option value="{{ depart.id }}">{{ depart.nombreDepartamento }}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Municipio</span>
+                                        </div>
+                                        <select class="custom-select" id="municipio" name="municipio" required>
+                                            <option value="" selected disabled>Elija el municipio</option>
+                                            {% if municipios %}
+                                            {% for muni in municipios %}
+                                            <option value="{{ muni.id }}" data-region="{{ muni.departamento_id_id }}">
+                                                {{ muni.nombreMunicipio }}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div> 
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Usuario</span>
+                                        </div>
+                                        <select class="custom-select" id="usersis" name="usersis" required>
+                                            <option value="" selected>Elija el usuario</option>
+                                            {% if usuarios %}
+                                            {% for userdispo in usuarios %}
+                                            <option value="{{ userdispo.id }}">{{ userdispo.first_name }}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>            
                             </form>
                         </div>
                     </div>
