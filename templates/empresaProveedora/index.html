@@ -1,0 +1,78 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<script src="{% static 'dist/js/jsEmpresaProveedora/indexEmpresaProveedora.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<!-- Varible que dispara los sweet alerts -->
+<ul>
+    {% for message in messages %}
+    <input type="text" name="opt" id="opt" value="{{ message }}" hidden>
+    {% endfor %}
+</ul>
+<!-- Varible que dispara los sweet alerts fin -->
+{% endif %}
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-10 offset-1">
+        <div class="card card-dark">
+            <div class="card-header">
+                Listado de Proveedores
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2 offset-lg-10 text-right">
+                        <a class="btn btn-info" href="{% url 'empresaProveedora_crear' %}" role="button"> <i class="fa fa-plus"
+                                aria-hidden="true"></i>
+                            Agregar</a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <div class="table-responsive">
+                            <table class="table display table-bordered table-striped" name="indexEmpresaProveedora"
+                                id="indexEmpresaProveedora">
+                                <thead class="bg-secondary">
+                                    <tr>
+
+                                        <td>Nombre Proveedor</td>
+                                        <td>Telefono Proveedor</td>
+                                        <td>Direccion</td>
+                                        <td>Opciones</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    {% if empresasProvedoras %}
+                                    {% for proveedor in empresasProvedoras %}
+                                    <tr>
+                                        <td> {{ proveedor.nombre }}</td>
+                                        <td> {{ proveedor.telefono }}</td>
+                                        <td> {{ proveedor.direccion }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="{% url 'empresaProveedora_editar' proveedor.id %}"
+                                                    class="btn btn-sm btn-success">Actualizar</a>
+                                                <a href="{% url 'empresaProveedora_eliminar' proveedor.id %}"
+                                                    class="btn btn-sm btn-danger">Eliminar</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
