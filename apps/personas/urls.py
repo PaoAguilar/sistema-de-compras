@@ -13,4 +13,10 @@ urlpatterns = [
     # URLS QUE MANEJAN LOS EMPLEADOS
     path('empleado/', indexEmpleado, name='indexEmpleado'),
     path('empleado/crear/', empleado_create, name='empleado_crear'),
+    path('empleado/editar/<int:id_empleado>/',
+         empleado_edit, name='empleado_editar'),
+    path('empleados/detalle/<int:id_empleado>/',
+         empleado_detalle, name='empleado_detalle'),
+    path('empleados/<int:id_empleado>/eliminar/',
+         empleado_eliminar, name='empleado_eliminar'),
 ]

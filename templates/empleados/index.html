@@ -58,11 +58,9 @@
                                         <td> {{ empleado.id_departamento.nombre }}</td>
                                         <td> {{ empleado.telefono }}</td>
                                         <td>
-                                            <a href=""
-                                                class="btn btn-sm btn-success">Actualizar</a>
-                                            <a href=""
-                                                class="btn btn-sm btn-secondary">Detalles</a>
-                                            <a id="eliminar" name="eliminar" class="btn btn-sm btn-danger">Eliminar</a>
+                                            <a href="{% url 'empleado_editar' empleado.id %}" class="btn btn-sm btn-success">Actualizar</a>
+                                            <a href="{% url 'empleado_detalle' empleado.id %}" class="btn btn-sm btn-secondary">Detalles</a>
+                                            <a href="{% url 'empleado_eliminar' empleado.id %}" class="btn btn-sm btn-danger">Eliminar</a>
                                         </td>
                                     </tr>
                                     {% endfor %}

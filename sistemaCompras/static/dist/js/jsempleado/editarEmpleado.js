@@ -92,7 +92,7 @@ $(document).ready(function () {
                 body: 'No ingresado el tipo de departamento o fecha de contratacion'
             });
         } else {
-            document.formuIngresar.submit()
+            document.formuEditar.submit()
         }
     });
 });

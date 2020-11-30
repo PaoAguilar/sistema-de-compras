@@ -115,3 +115,82 @@ def empleado_create(request):
                     'departamentos': depart,
                     'municipios': muni}
         return render(request, 'empleados/ingresar.html', contexto)
+
+
+def empleado_edit(request, id_empleado):
+
+    usersdispo = User.objects.exclude(
+        id__in=Empleado.objects.order_by().values('auth_id_id').distinct())
+    tipodepartamento = Departamento.objects.all()
+    infoempleado = Empleado.objects.get(id=id_empleado)
+    depart = Depa.objects.all()
+    muni = Municipio.objects.all()
+
+    if request.method == 'GET':
+        contexto = {'usuarios': usersdispo,
+                    'empleado': infoempleado,
+                    'tipoDepas': tipodepartamento,
+                    'departamentos': depart,
+                    'municipios': muni
+                    }
+        return render(request, 'empleados/editar.html', contexto)
+
+    elif request.method == 'POST':
+        # obteniendo los datos a actualizar de empleado
+        nombre1 = request.POST.get('nombre1')
+        nombre2 = request.POST.get('nombre2')
+        apellido1 = request.POST.get('apellido1')
+        apellido2 = request.POST.get('apellido2')
+        genero = request.POST.get('genero')
+        fechaNaci = request.POST.get('fechaNaci')
+        telefono = request.POST.get('telefono')
+        dep = request.POST.get('departamento')
+        muni = request.POST.get('municipio')
+        direccion = request.POST.get('direccion')
+        dui = request.POST.get('dui')
+        nit = request.POST.get('nit')
+        usersis = request.POST.get('usersis')
+        tipoDepa = request.POST.get('tipoDepa')
+        fechcontra = request.POST.get('fechacontra')
+
+        # Actualizamos primero el info de la tablapersona
+        infoempleado.primer_nombre = nombre1
+        infoempleado.segundo_nombre = nombre2
+        infoempleado.primer_apellido = apellido1
+        infoempleado.segundo_apellido = apellido2
+        infoempleado.genero = genero
+        infoempleado.fecha_nacimiento = fechaNaci
+        infoempleado.telefono = telefono
+        infoempleado.depa_id_id = dep
+        infoempleado.municipio_id_id = muni
+        infoempleado.direccion = direccion
+        infoempleado.dui = dui
+        infoempleado.nit = nit
+        infoempleado.id_departamento_id = tipoDepa
+        infoempleado.fecha_contratacion = fechcontra
+        infoempleado.save()
+        messages.success(request, '2')
+        return redirect('indexEmpleado')
+
+
+def empleado_detalle(request, id_empleado):
+    usersdispo = User.objects.all()
+    infoempleado = Empleado.objects.get(id=id_empleado)
+    tipodepartamento = Departamento.objects.all()
+    depart = Depa.objects.all()
+    muni = Municipio.objects.all()
+    contexto = {'usuarios': usersdispo,
+                'empleado': infoempleado,
+                'tipoDepas': tipodepartamento,
+                'departamentos': depart,
+                'municipios': muni
+                }
+    return render(request, 'empleados/detalles.html', contexto)
+
+
+def empleado_eliminar(request, id_empleado):
+    if request.method == 'GET':
+        infoempleado = Empleado.objects.get(id=id_empleado)
+        infoempleado.delete()
+        messages.success(request, '3')
+    return redirect('indexEmpleado')

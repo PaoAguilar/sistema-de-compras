@@ -1,10 +1,5 @@
 {% extends 'base.html' %}
 {% load static %}
-
-{% block header %}
-<script src="{% static 'dist/js/jsempleado/ingresarEmpleado.js' %}"></script>
-{% endblock %}
-
 {% block content %}
 <br>
 <br>
@@ -12,18 +7,15 @@
 <div class="container">
     <div class="row">
         <div class="col-12">
-            <div class="card card-dark">
-
+            <div class="card card-info">
                 <div class="card-header with-border">
-                    <h5>Ingresar datos de empleado.</h5>
+                    <h5>Datos de empleado.</h5>
                 </div>
-
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <form method="post" name="formuIngresar">
+                            <form method="post" name="">
                                 {% csrf_token %}
-
                                 <!-- Nombres -->
                                 <div class="row form-group">
                                     <div class="input-group col-lg-10 offset-lg-1">
@@ -31,7 +23,7 @@
                                             <span class="input-group-text">Primer Nombre</span>
                                         </div>
                                         <input type="text" class="form-control" id="nombre1" name="nombre1"
-                                            placeholder="Ingrese el primer nombre" required>
+                                            value="{{empleado.primer_nombre}}" disabled>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -40,7 +32,7 @@
                                             <span class="input-group-text">Segundo Nombre</span>
                                         </div>
                                         <input type="text" class="form-control" id="nombre2" name="nombre2"
-                                            placeholder="Ingrese el segundo nombre" required>
+                                            value="{{empleado.segundo_nombre}}" disabled>
                                     </div>
                                 </div>
 
@@ -51,7 +43,7 @@
                                             <span class="input-group-text">Primer apellido</span>
                                         </div>
                                         <input type="text" class="form-control" id="apellido1" name="apellido1"
-                                            placeholder="Ingrese el primer apellido" required>
+                                            value="{{empleado.primer_apellido}}" disabled>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -60,7 +52,7 @@
                                             <span class="input-group-text">Segundo Apellidos</span>
                                         </div>
                                         <input type="text" class="form-control" id="apellido2" name="apellido2"
-                                            placeholder="Ingrese el segundo apellido" required>
+                                            value="{{empleado.segundo_apellido}}" disabled>
                                     </div>
                                 </div>
 
@@ -70,11 +62,20 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Género</span>
                                         </div>
-                                        <select class="custom-select" id="genero" name="genero" required>
-                                            <option value="" selected disabled>Elija su genero</option>
-                                            <option value="Masculino">Masculino</option>
+                                        <select class="custom-select" id="genero" name="genero" disabled>
+                                            {% if empleado.genero == 'Masculino' %}
+                                            <option value="Masculino" selected>Masculino</option>
                                             <option value="Femenino">Femenino</option>
                                             <option value="Otro">Otro</option>
+                                            {% elif empleado.genero == 'Femenino'%}
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino" selected>Femenino</option>
+                                            <option value="Otro">Otro</option>
+                                            {% else %}
+                                            <option value="Masculino">Masculino</option>
+                                            <option value="Femenino">Femenino</option>
+                                            <option value="Otro" selected>Otro</option>
+                                            {% endif %}
                                         </select>
                                     </div>
                                 </div>
@@ -86,7 +87,8 @@
                                             <span class="input-group-text">Fecha de nacimiento</span>
                                         </div>
                                         <input type="date" class="form-control" id="fechaNaci" name="fechaNaci"
-                                            placeholder="Ingrese fecha de nacimiento" data-mask="" required>
+                                            placeholder="Ingrese fecha de nacimiento" data-mask=""
+                                            value="{{empleado.fecha_nacimiento|date:'yy-m-d'}}" disabled>
                                     </div>
                                 </div>
 
@@ -97,8 +99,8 @@
                                             <span class="input-group-text">Teléfono</span>
                                         </div>
                                         <input type="text" class="form-control" id="telefono" name="telefono"
-                                            placeholder="Ingrese el número de teléfono del empleado"
-                                            data-inputmask='"mask": "9999-9999"' data-mask>
+                                            placeholder="Ingrese el número de teléfono del paciente"
+                                            data-inputmask='"mask": "9999-9999"' data-mask value="{{empleado.telefono}}" disabled>
                                     </div>
                                 </div>
 
@@ -109,7 +111,7 @@
                                             <span class="input-group-text">Dirección</span>
                                         </div>
                                         <input type="text" class="form-control" id="direccion" name="direccion"
-                                            placeholder="Ingrese la dirección" required>
+                                            placeholder="Ingrese la dirección" value="{{empleado.direccion}}" disabled>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -117,10 +119,14 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Departamento</span>
                                         </div>
-                                        <select class="custom-select" id="departamento" name="departamento" required>
+                                        <select class="custom-select" id="departamento" name="departamento" disabled>
                                             <option value="" selected disabled>Elija el departamento</option>
                                             {% if departamentos %}
                                             {% for depart in departamentos %}
+                                            {% if empleado.depa_id_id == depart.id  %}
+                                            <option value="{{ depart.id }}" selected>{{ depart.nombreDepartamento }}
+                                            </option>
+                                            {% endif %}
                                             <option value="{{ depart.id }}">{{ depart.nombreDepartamento }}</option>
                                             {% endfor %}
                                             {% endif %}
@@ -132,10 +138,13 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Municipio</span>
                                         </div>
-                                        <select class="custom-select" id="municipio" name="municipio" required>
+                                        <select class="custom-select" id="municipio" name="municipio" disabled>
                                             <option value="" selected disabled>Elija el municipio</option>
                                             {% if municipios %}
                                             {% for muni in municipios %}
+                                            {% if empleado.municipio_id_id == muni.id  %}
+                                            <option value="{{ muni.id }}" selected>{{ muni.nombreMunicipio }}</option>
+                                            {% endif %}
                                             <option value="{{ muni.id }}" data-region="{{ muni.departamento_id_id }}">
                                                 {{ muni.nombreMunicipio }}</option>
                                             {% endfor %}
@@ -151,7 +160,8 @@
                                             <span class="input-group-text">DUI</span>
                                         </div>
                                         <input type="text" class="form-control" id="dui" name="dui"
-                                            placeholder="Ingrese el DUI" data-inputmask='"mask": "99999999-"' data-mask>
+                                            placeholder="Ingrese el DUI" data-inputmask='"mask": "99999999-"' data-mask
+                                            value="{{empleado.dui}}" disabled>
                                     </div>
                                 </div>
 
@@ -162,7 +172,8 @@
                                             <span class="input-group-text">NIT</span>
                                         </div>
                                         <input type="text" class="form-control" id="nit" name="nit"
-                                            placeholder="Ingrese el NIT" data-inputmask='"mask": "9999-999999-999-"' data-mask>
+                                            placeholder="Ingrese el NIT" data-inputmask='"mask": "9999-999999-999-"'
+                                            data-mask value="{{empleado.nit}}" disabled>
                                     </div>
                                 </div>
 
@@ -172,15 +183,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Usuario</span>
                                         </div>
-                                        <select class="custom-select" id="usersis" name="usersis" required>
-                                            <option value="" selected>Elija el usuario</option>
+                                        <select class="custom-select" id="usersis" name="usersis" disabled>
+                                            <option value="{{empleado.auth_id_id}}" selected>
+                                                {{empleado.auth_id.first_name}}</option>
                                             {% if usuarios %}
-                                            {% for userdispo in usuarios %}
-                                            <option value="{{ userdispo.id }}">{{ userdispo.first_name }}</option>
-                                            {% endfor %}
+                                                {% for userdispo in usuarios %}
+                                                    <option value="{{ userdispo.id }}">{{ userdispo.first_name }}</option>
+                                                {% endfor %}
                                             {% endif %}
                                         </select>
-
                                     </div>
                                 </div>
 
@@ -190,11 +201,15 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Departamento al que pertenece</span>
                                         </div>
-                                        <select class="custom-select" id="tipoDepa" name="tipoDepa" required>
+                                        <select class="custom-select" id="tipoDepa" name="tipoDepa" disabled>
                                             <option value="" selected disabled>Elija el departamento</option>
                                             {% if tipoDepas %}
                                             {% for tipo in tipoDepas %}
+                                            {% if empleado.id_departamento_id == tipo.id %}
+                                            <option value="{{ tipo.id}}" selected>{{ tipo.nombre }}</option>
+                                            {% else %}
                                             <option value="{{ tipo.id }}">{{ tipo.nombre }}</option>
+                                            {% endif %}
                                             {% endfor %}
                                             {% endif %}
                                         </select>
@@ -208,24 +223,22 @@
                                             <span class="input-group-text">Fecha de contratacion</span>
                                         </div>
                                         <input type="date" class="form-control" id="fechacontra" name="fechacontra"
-                                            placeholder="Ingrese fecha de Contratación" required>
+                                            placeholder="Ingrese fecha de Contratación" data-mask=""
+                                            value="{{empleado.fecha_contratacion|date:'yy-m-d'}}" disabled>
                                     </div>
-                                </div>
+                                </div>                                
                             </form>
                         </div>
                     </div>
 
                     <div class="row">
                         <div class="col-lg-4 offset-lg-7 text-right">
-                            <a href="{% url 'indexEmpleado' %}" role="button" class="btn btn-danger">Cancelar</a>
-                            <button type="submit" id="guardar" name="guardar" class="btn btn-info">Guardar</button>
+                            <a href="{% url 'indexEmpleado' %}" role="button" class="btn btn-danger">Volver</a>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
-
 {% endblock %}
