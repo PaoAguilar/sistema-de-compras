@@ -13,8 +13,8 @@
       <!-- Sidebar user panel (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="info">
-          <!-- <a  class="d-block text-center">{{ request.user.first_name }} {{ request.user.last_name }}</a>
-          <a  class="d-block text-center">{% now "d/b/Y H:i"%}</a> -->
+          <a  class="d-block text-center">{{ request.user.first_name }} {{ request.user.last_name }}</a>
+          <a  class="d-block text-center">{% now "d/b/Y H:i"%}</a>
         </div>
       </div>
 
@@ -103,7 +103,7 @@
             </ul>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="" class="nav-link">
+                <a href="{% url 'indexEmpleado' %}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
                   <p>Gestionar empleados</p>
                 </a>
