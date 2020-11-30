@@ -54,6 +54,9 @@ def departamento_eliminar(request, id_depto):
 
     return redirect('indexDepartamento')
 
+####################################### DEPARTAMENTOS ####################################
+
+
 def indexEmpresaProveedora(request):
     empresaProveedoraregistradas = EmpresaProvedora.objects.all()
     contexto = {'empresasProveedoras': empresaProveedoraregistradas}
@@ -75,7 +78,7 @@ def empresaProveedora_create(request):
         new_empresaProveedora.nombre = nombre
         new_empresaProveedora.telefono = telefono
         new_empresaProveedora.direccion = direccion
-        
+
         new_empresaProveedora.save()
         messages.success(request, '1')
         return redirect('indexEmpresaProveedora')
@@ -124,6 +127,7 @@ def empresaProveedora_eliminar(request, id_proveedor):
         messages.success(request, '3')
 
     return redirect('indexEmpresaProveedora')
+
 ####################################### EMPLEADOS ####################################
 
 
@@ -223,7 +227,6 @@ def empleado_edit(request, id_empleado):
         tipoDepa = request.POST.get('tipoDepa')
         fechcontra = request.POST.get('fechacontra')
 
-        # Actualizamos primero el info de la tablapersona
         infoempleado.primer_nombre = nombre1
         infoempleado.segundo_nombre = nombre2
         infoempleado.primer_apellido = apellido1
