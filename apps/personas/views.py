@@ -95,23 +95,33 @@ def empresaProveedora_create(request):
 
 def empresaProveedora_edit(request, id_proveedor):
     proveedor = EmpresaProvedora.objects.get(id=id_proveedor)
+    usersdispo = User.objects.exclude(
+        id__in=Empleado.objects.order_by().values('auth_id_id').distinct())
+    depart = Depa.objects.all()
+    muni = Municipio.objects.all()
+
     if request.method == 'GET':
 
-        contexto = {'empresaProveedora': proveedor}
+        contexto = {
+            'empresaProveedora': proveedor,
+            'usuarios': usersdispo,    
+            'departamentos': depart,
+            'municipios': muni
+        }
         return render(request, 'empresaProveedora/editar.html', contexto)
 
     elif request.method == 'POST':
 
-        user_id = request.POST.get('user_id')
-        depa_id = request.POST.get('depa_id')
-        municipio_id = request.POST.get('municipio_id')
+        usersis = request.POST.get('usersis')
+        dep = request.POST.get('departamento')
+        muni = request.POST.get('municipio')
         nombre = request.POST.get('nombre')
         telefono = request.POST.get('telefono')
         direccion = request.POST.get('direccion')
 
-        proveedor.auth_id_id = user_id
-        proveedor.depa_id_id = depa_id
-        proveedor.municipio_id_id = municipio_id
+        proveedor.auth_id_id = usersis
+        proveedor.depa_id_id = dep
+        proveedor.municipio_id_id = muni
         proveedor.nombre = nombre
         proveedor.telefono = telefono
         proveedor.direccion = direccion
