@@ -1,5 +1,5 @@
 #para no estar cambiando 
-settings.py
+sistemaCompras/settings.py
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
