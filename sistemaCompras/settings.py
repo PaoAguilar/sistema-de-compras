@@ -40,8 +40,8 @@ INSTALLED_APPS = [
     'apps.personas',
     'apps.compras',
     'apps.articulos',
-    'apps.usuarios'
-
+    'apps.usuarios',
+    'django_seed',
 ]
 
 MIDDLEWARE = [
