@@ -1,0 +1,125 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-8 offset-2 ">
+            <div class="card card-info">
+
+                <div class="card-header with-border">
+                    Generar Requisicion.
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="post" name="form_ingresar" >
+                                {% csrf_token %}
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Estado</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Fecha Pedido</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecha_pedido" name="fecha_pedido"
+                                            data-mask="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Fecha de Entrega</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega"
+                                            data-mask="" required>
+                                    </div>
+                                </div>
+
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Cantidad de pedido</span>
+                                        </div>
+                                        <input class="form-control" type="number" id="cantidad_pedido" name="cantidad_pedido"
+                                            required
+                                            placeholder="Ingrese el máximo de pacientes que atenderá cada doctor">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-10 offset-lg-1">
+                                        <label>Seleccione al personal asignado a este turno</label>
+                                        <div class="table-responsive">
+                                            <table class="table table-bordered table-striped" id="tablaarticulos"
+                                                name="tablaArticulos">
+                                                <thead class="bg-info">
+                                                    <tr>
+                                                        <td>Serial</td>
+                                                        <td>Nombre</td>
+                                                        <td>Marca</td>
+                                                        <td>Modelo</td>
+                                                        <td>Opciones</td>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    {% if articulos %}
+                                                    {% for articulo in articulos %}
+                                                    <tr>
+                                                       <td>{{articulo.serial}}</td>
+                                                        <td>{{articulo.nombre }}</td>
+                                                        <td>{{articulo.marca}}</td> 
+                                                        <td>{{articulo.modelo}}</td> 
+                                                        <td>
+                                                            <div class="form-check">
+                                                                <label class="form-check-label">
+                                                                    <input type="checkbox" class="form-check-input"
+                                                                      name="requision" id="{{articulo.id}}" 
+                                                                    value ="{{articulo.id}}"  >
+                                                                    Seleccionar
+                                                                </label>
+                                                            </div>
+                                                        </td>
+                                                    </tr>
+                                                    {% endfor %}
+                                                    {% endif %}
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 offset-lg-7 text-right">
+                                        <a role="button"
+                                            class="btn btn-danger">Cancelar</a>
+                                        <button type="submit" id="guardar" name="guardar"
+                                            class="btn btn-info">Guardar</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}

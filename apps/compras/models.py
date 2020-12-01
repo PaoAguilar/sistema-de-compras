@@ -5,7 +5,7 @@ from apps.personas.models import Departamento, EmpresaProvedora
 
 class RequesionCompra(models.Model):
     #Id default
-    id_articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE, db_column= 'id_articulos')
+    articulos = models.ManyToManyField(Articulo)
     id_departamento = models.ForeignKey(Departamento, on_delete= models.CASCADE, db_column='id_departamento')
     cantidad_pedido = models.IntegerField()
     fecha_pedido = models.DateField()
