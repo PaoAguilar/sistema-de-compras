@@ -21,15 +21,8 @@
             <div class="card-header">
                 Listado de requisicion
             </div>
-            <div class="card-body">
-                <div class="row">
-                    <div class="col-lg-2 offset-lg-10 text-right">
-                        <a class="btn btn-primary" href="{% url 'generar_requisicion' %}"  role="button"> <i class="fa fa-plus"
-                                aria-hidden="true"></i>
-                            Nueva requisicion</a>
-                    </div>
-                </div>
-                <br>
+            
+            <br>
                 <div class="row">
                     <div class="col align-self-center">
                         <div class="table-responsive">
@@ -52,12 +45,8 @@
                                         <td>{{requi.fecha_entrega}}</td>
                                         <td>{{requi.estado}}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                <a href="{% url 'agregar_articulo' requi.id %}"
-                                                    class="btn btn-sm btn-success">
-                                                    Agregar articulos
-                                                </a>
-                                                <a class="btn btn-sm btn-danger" id="eliminar">Eliminar</a>
+                                                <a href="{% url 'boton_aprobar' requi.id %}" 
+                                                class="btn btn-sm btn-danger" id="eliminar">Aprobar</a>
                                                 <input type="hidden"  />
                                             </div>
                                         </td>
