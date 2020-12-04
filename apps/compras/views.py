@@ -10,7 +10,6 @@ def indexRequision(request):
     emple = Empleado.objects.get(auth_id=user)
     requisioncreadas = RequesionCompra.objects.filter(id_departamento=emple.id_departamento.id, estado="Solicitado")#valorar si hacer una relacion con empleado para ver solo el que el usuario crea
     contexto = {'requision': requisioncreadas}
-    print(emple.id_departamento.id)
     return render(request,'requision/index.html', contexto)
 
 def generarRequision(request):
@@ -34,11 +33,24 @@ def generarRequision(request):
 
 def generarRequisionArti(request, id_requisicion):
     if request.method == 'POST':
-        Requesion = RequesionCompra.objects.get(pk=id_requisicion)
-        new_rarticulo = RequesicionArticulo()
+        idarticulo = request.POST.get('id_articulo')
+        cantidad = request.POST.get('cantidad')
 
+        requesion = RequesionCompra.objects.get(pk=id_requisicion)
+        new_rarticulo = RequesicionArticulo()
+        new_rarticulo.requisicion_id = requesion.id
+        new_rarticulo.articulo_id = idarticulo
+        new_rarticulo.cantidad_pedido = cantidad
+        new_rarticulo.save()
+        return redirect('indexRequision')
     else:
-        return render(request,'requision/agregar_articulo.html')
+        articulo = Articulo.objects.all()
+        rearticulo = RequesicionArticulo.objects.filter(requisicion_id= id_requisicion)
+        print(rearticulo)
+        contexto = {'articulo': articulo,
+                    'rearticulo': rearticulo
+                    }
+        return render(request,'requision/agregar_articulo.html', contexto)
 
 def AprobarRequision(request):
     user = request.user.id
