@@ -10,11 +10,18 @@ urlpatterns = [
     path('departamento/<int:id_depto>/eliminar/',
          departamento_eliminar, name='departamento_eliminar'),
 
-      # URLS QUE MANEJAN LOS PROVEEDORES
-    path('empresaProveedora/', indexEmpresaProveedora, name='indexEmpresaProveedora'),
-    path('empresaProveedora/crear/', empresaProveedora_create, name='empresaProveedora_crear'),
-    path('empresaProveedora/editar/<int:id_proveedor>/',empresaProveedora_edit, name='empresaProveedora_editar'),
-    path('empresaProveedora/<int:id_proveedor>/eliminar/',empresaProveedora_eliminar, name='empresaProveedora_eliminar'),
+    # URLS QUE MANEJAN LOS PROVEEDORES
+    path('empresaProveedora/', indexEmpresaProveedora,
+         name='indexEmpresaProveedora'),
+    path('empresaProveedora/crear/', empresaProveedora_create,
+         name='empresaProveedora_crear'),
+    path('empresaProveedora/editar/<int:id_proveedor>/',
+         empresaProveedora_edit, name='empresaProveedora_editar'),
+    path('empresaProveedora/detalle/<int:id_proveedor>/',
+         empresaProveedora_detalle, name='empresaProveedora_detalle'),
+    path('empresaProveedora/<int:id_proveedor>/eliminar/',
+         empresaProveedora_eliminar, name='empresaProveedora_eliminar'),
+
     # URLS QUE MANEJAN LOS EMPLEADOS
     path('empleado/', indexEmpleado, name='indexEmpleado'),
     path('empleado/crear/', empleado_create, name='empleado_crear'),

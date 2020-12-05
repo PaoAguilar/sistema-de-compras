@@ -40,9 +40,9 @@
                                 id="indexEmpresaProveedora">
                                 <thead class="bg-secondary">
                                     <tr>
-                                        <td>Nombre Proveedor</td>
-                                        <td>Telefono Proveedor</td>
-                                        <td>Direccion</td>
+                                        <td>Nombre de empresa proveedorora</td>
+                                        <td>Telefono</td>
+                                        <td>Dirección</td>
                                         <td>Opciones</td>
                                     </tr>
                                 </thead>
@@ -55,11 +55,10 @@
                                         <td> {{ proveedor.telefono }}</td>
                                         <td> {{ proveedor.direccion }}</td>
                                         <td>
-                                            <div class="btn-group">
-                                                <a href="{% url 'empresaProveedora_editar' proveedor.id %}"
-                                                    class="btn btn-sm btn-success">Actualizar</a>
-                                                <a href="{% url 'empresaProveedora_eliminar' proveedor.id %}"
-                                                    class="btn btn-sm btn-danger">Eliminar</a>
+                                            <div class="">
+                                                <a href="{% url 'empresaProveedora_editar' proveedor.id %}" class="btn btn-sm btn-success">Actualizar</a>
+                                                <a href="{% url 'empresaProveedora_detalle' proveedor.id %}" class="btn btn-sm btn-secondary">Detalles</a>
+                                                <a href="{% url 'empresaProveedora_eliminar' proveedor.id %}" class="btn btn-sm btn-danger">Eliminar</a>
                                             </div>
                                         </td>
                                     </tr>

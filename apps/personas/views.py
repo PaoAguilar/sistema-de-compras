@@ -130,6 +130,19 @@ def empresaProveedora_edit(request, id_proveedor):
         return redirect('indexEmpresaProveedora')
 
 
+def empresaProveedora_detalle(request, id_proveedor):
+    usersdispo = User.objects.all()
+    infoproveedor = EmpresaProvedora.objects.get(id=id_proveedor)
+    depart = Depa.objects.all()
+    muni = Municipio.objects.all()
+    contexto = {'usuarios': usersdispo,
+                'empresaProveedora': infoproveedor,
+                'departamentos': depart,
+                'municipios': muni
+                }
+    return render(request, 'empresaProveedora/detalles.html', contexto)
+
+
 def empresaProveedora_eliminar(request, id_proveedor):
     if request.method == 'GET':
         proveedor = EmpresaProvedora.objects.get(id=id_proveedor)
