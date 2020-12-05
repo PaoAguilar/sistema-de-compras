@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block header %}
-<script src="{% static 'dist/js/jsdepartamento/editarDepartamento.js' %}"></script>
+<script src="{% static 'dist/js/jsEmpresaProveedora/editarEmpresaProveedora.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -45,7 +45,7 @@
                                             <span class="input-group-text">Dirección</span>
                                         </div>
                                         <input type="text" class="form-control" id="direccion" name="direccion"
-                                            placeholder="Ingrese la dirección" value="{{ empresaProveedora.direciion }}" required>
+                                            placeholder="Ingrese la dirección" value="{{ empresaProveedora.direccion }}" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -57,6 +57,10 @@
                                             <option value="" selected disabled>Elija el departamento</option>
                                             {% if departamentos %}
                                             {% for depart in departamentos %}
+                                            {% if empresaProveedora.depa_id_id == depart.id  %}
+                                            <option value="{{ depart.id }}" selected>{{ depart.nombreDepartamento }}
+                                            </option>
+                                            {% endif %}
                                             <option value="{{ depart.id }}">{{ depart.nombreDepartamento }}</option>
                                             {% endfor %}
                                             {% endif %}
@@ -72,13 +76,16 @@
                                             <option value="" selected disabled>Elija el municipio</option>
                                             {% if municipios %}
                                             {% for muni in municipios %}
+                                            {% if empresaProveedora.municipio_id_id == muni.id  %}
+                                            <option value="{{ muni.id }}" selected>{{ muni.nombreMunicipio }}</option>
+                                            {% endif %}
                                             <option value="{{ muni.id }}" data-region="{{ muni.departamento_id_id }}">
                                                 {{ muni.nombreMunicipio }}</option>
                                             {% endfor %}
                                             {% endif %}
                                         </select>
                                     </div>
-                                </div> 
+                                </div>
                                 <div class="row form-group">
                                     <div class="input-group col-lg-10 offset-lg-1">
                                         <div class="input-group-prepend">
@@ -100,7 +107,7 @@
 
                     <div class="row">
                         <div class="col-lg-4 offset-lg-7 text-right">
-                            <a href="{% url 'indexDepartamento' %}" role="button" class="btn btn-danger">Cancelar</a>
+                            <a href="{% url 'indexEmpresaProveedora' %}" role="button" class="btn btn-danger">Cancelar</a>
                             <button type="submit" id="guardar" name="guardar" class="btn btn-info">Guardar</button>
                         </div>
                     </div>
