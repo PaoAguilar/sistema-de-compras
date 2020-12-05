@@ -94,8 +94,10 @@
                                     <table class="table" id="tableArticulosRequisicion" name="tableArticulosRequisicion" style="width: 100%;">
                                         <thead class="bg-secondary">
                                             <tr>
+                                                <td>Serial </td>
                                                 <td>Articulo </td>
-                                                <td>cantidad </td>
+                                                <td>Modelo</td>
+                                                <td>Cantidad </td>
                                                 <td>Opciones</td>
                                             </tr>
                                         </thead>
@@ -103,11 +105,12 @@
                                             {% if rearticulo %}
                                             {% for rec in rearticulo %}
                                             <tr>
+                                                <td>{{rec.articulo.serial}}</td>
                                                 <td>{{rec.articulo.nombre}}</td>
+                                                <td>{{rec.articulo.modelo}}</td>
                                                 <td>{{rec.cantidad_pedido}}</td>
                                                 <td>
-                                                    <a
-                                                        class="btn btn-sm btn-danger">Eliminar</a>
+                                                    <a href="{% url 'eliminar_articulo' rec.id %}" role="button" class="btn btn-sm btn-danger">Eliminar</a>
                                                 </td>
                                             </tr>
                                             {% endfor %}

@@ -121,6 +121,12 @@ def botonCancelar(request, id_requisicion):
         messages.success(request, '1')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
+def eliminar_articulo(request, id_rearticulo):
+    if request.method == 'GET':
+        requi = RequesicionArticulo.objects.get(id=id_rearticulo)
+        requi.delete()
+        messages.success(request, '3')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
 
 def requisicion_eliminar1(request, id_requisicion):
     if request.method == 'GET':
@@ -129,4 +135,6 @@ def requisicion_eliminar1(request, id_requisicion):
         messages.success(request, '2')
 
     return redirect('aprobarRequision')
+
+
 
