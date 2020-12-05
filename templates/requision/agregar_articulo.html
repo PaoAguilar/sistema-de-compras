@@ -1,105 +1,135 @@
 {% extends 'base.html' %}
 {% load static %}
 
-{% block content %}
+{% block header %}
+<script src="{% static 'dist/js/jsrequisicion/agregarArticuloRequisicion.js' %}"></script>
+{% endblock %}
 
+{% block content %}
+{% if messages %}
+<!-- Varible que dispara los sweet alerts -->
+<ul>
+    {% for message in messages %}
+    <input type="text" name="opt" id="opt" value="{{ message }}" hidden>
+    {% endfor %}
+</ul>
+<!-- Varible que dispara los sweet alerts fin -->
+{% endif %}
 <br>
 <br>
 <br>
 <div class="container">
     <div class="row align-items-center">
-        <div class="col-8 offset-2 ">
-            <div class="card card-info">
+        <div class="col-10 offset-1 ">
+            <div class="card card-dark">
 
                 <div class="card-header with-border">
-                    Agregar articulos a requesicion.
+                    <h5>Agregar articulos a requesición.</h5>
                 </div>
-
+                <!-- Card que engloba el form -->
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
-                            <form method="post" name="form_ingresar" >
-                                {% csrf_token %}
+                            <p>
+                                <button class="btn btn-outline-secondary dropdown-toggle dropdown-icon col-10 offset-1" type="button"
+                                    data-toggle="collapse" data-target="#formulario_requisicion" aria-expanded="false">
+                                    <span aria-hidden="true"></span> Agregar Articulos para requisición &nbsp;
+                                </button>
+                            </p>
 
-                                   <!--Usuario Sistema-->
-                                <div class="row form-group">
-                                    <div class="input-group col-lg-10 offset-lg-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Articulo</span>
+                            <div class="collapse" id="formulario_requisicion">
+                                <form method="post" name="form_ingresar" >
+                                    {% csrf_token %}
+                                    <!--Usuario Sistema-->
+                                    <div class="row form-group">
+                                        <div class="input-group col-lg-10 offset-lg-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Articulo</span>
+                                            </div>
+                                            <select class="custom-select" id="id_articulo" name="id_articulo" style="width: 80% !important" required>
+                                                <option value="" selected >Elija el articulo</option>
+                                                {% if articulo %}
+                                                {% for arti in articulo %}
+                                                <option value="{{ arti.id }}">{{ arti.nombre }}</option>
+                                                {% endfor %}
+                                                {% endif %}
+                                            </select>
                                         </div>
-                                        <select class="custom-select" id="id_articulo" name="id_articulo" required>
-                                            <option value="" selected >Elija el articulo</option>
-                                            {% if articulo %}
-                                            {% for arti in articulo %}
-                                            <option value="{{ arti.id }}">{{ arti.nombre }}</option>
+                                    </div>
+                                    <!-- Cantidad de articulos -->
+                                    <div class="row form-group">
+                                        <div class="input-group col-lg-10 offset-lg-1">
+                                            <div class="input-group-prepend">
+                                                <span class="input-group-text">Cantidad</span>
+                                            </div>
+                                            <input type="number" class="form-control" id="cantida" name="cantidad"
+                                                placeholder="Ingrese el cantidad" required>
+                                        </div>
+                                    </div>
+                                    <!-- Botones -->
+                                    <div class="row">
+                                        <div class="col-lg-4 offset-lg-7 text-right">
+                                            <a href="{% url 'indexRequision' %}" role="button" class="btn btn-danger">Cancelar</a>
+                                            <button type="submit" id="guardar" name="guardar"
+                                                class="btn btn-info">Guardar</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Fin de card que engloba el form -->
+
+                <!-- Datatable para articulos -->
+                <div class="row align-items-center">
+                    <div class="col-lg-10 offset-1">
+                        <div class="card card-secondary card-outline border-secondary">
+
+                            <div class="card-header">
+                                <h5>Listado articulos para requesición.</h5>
+                            </div>
+                            <div class="card-body">
+                                <div class="table-responsive">
+                                    <table class="table" id="tableArticulosRequisicion" name="tableArticulosRequisicion" style="width: 100%;">
+                                        <thead class="bg-secondary">
+                                            <tr>
+                                                <td>Articulo </td>
+                                                <td>cantidad </td>
+                                                <td>Opciones</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if rearticulo %}
+                                            {% for rec in rearticulo %}
+                                            <tr>
+                                                <td>{{rec.articulo.nombre}}</td>
+                                                <td>{{rec.cantidad_pedido}}</td>
+                                                <td>
+                                                    <a
+                                                        class="btn btn-sm btn-danger">Eliminar</a>
+                                                </td>
+                                            </tr>
                                             {% endfor %}
                                             {% endif %}
-                                        </select>
-
-                                <div class="row form-group">
-                                    <div class="input-group col-lg-10 offset-lg-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Cantidad</span>
-                                        </div>
-                                        <input type="number" class="form-control" id="cantida" name="cantidad"
-                                               placeholder="Ingrese el cantidad" required>
-                                    </div>
+                                        </tbody>
+                                    </table>
                                 </div>
-
-                                <div class="row">
-                                    <div class="col-lg-4 offset-lg-7 text-right">
-                                        <a role="button"
-                                            class="btn btn-danger">Cancelar</a>
-                                        <button type="submit" id="guardar" name="guardar"
-                                            class="btn btn-info">Guardar</button>
-                                    </div>
-                                </div>
-
-                            </form>
-
+                            </div>
 
                         </div>
                     </div>
                 </div>
-
-        <div class="card card-outline border-secondary mb-3 ">
-            <div class="card-header">
-                <h5>Listado articulos para requesicion.</h5>
-            </div>
-            <div class="card-body">
-                <div class="table-responsive">
-                    <table class="table" id="articulos" name="tablearticulos" style="width: 100%;">
-                        <thead class="bg-secondary">
-                            <tr>
-                                <td>Articulo </td>
-                                <td>cantidad </td>
-                                <td>Opciones</td>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            {% if rearticulo %}
-                            {% for rec in rearticulo %}
-                            <tr>
-                                <td>{{rec.articulo.nombre}}</td>
-                                <td>{{rec.cantidad_pedido}}</td>
-                                <td>
-                                    <a
-                                        class="btn btn-sm btn-danger">Eliminar</a>
-                                </td>
-                            </tr>
-                            {% endfor %}
-                            {% endif %}
-                        </tbody>
-                    </table>
+                <!-- Fin del datatable -->
+                <!-- Boton de regresar -->
+                <div class="row">
+                    <div class="col-lg-4 offset-lg-7 text-right">
+                        <a href="{% url 'indexRequision' %}" role="button" class="btn btn-secondary">Regresar</a>
+                    </div>
                 </div>
-            </div>
-        </div>
-                
-
+                <br>
             </div>
         </div>
     </div>
-
 </div>
-
 {% endblock %}
