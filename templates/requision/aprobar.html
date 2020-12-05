@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<script src="{% static 'dist/js/jsrequisicion/aprobarArticuloRequisicion.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<!-- Varible que dispara los sweet alerts -->
+<ul>
+    {% for message in messages %}
+    <input type="text" name="opt" id="opt" value="{{ message }}" hidden>
+    {% endfor %}
+</ul>
+<!-- Varible que dispara los sweet alerts fin -->
+{% endif %}
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-lg-10 offset-lg-1">
+        <div class="card card-dark">
+            <div class="card-header">
+                <h5>Listado de requisiciones por aprobar: {{ emple.id_departamento.nombre }}.</h5>
+                
+            </div>
+            <br>
+            
+            <div class="col-lg-10 offset-1">
+                <div class="card card-secondary card-outline border-secondary">
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="col align-self-center">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-striped" id="tableAprobaRequision">
+                                        <thead class="bg-secondary">
+                                            <tr>
+                                                <th>Id</th>
+                                                <th>Fecha pedido</th>
+                                                <th>Fecha entrega</th>
+                                                <th>Estado</th>
+                                                <td>Opciones</td>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            {% if requision %}
+                                            {% for requi in requision %}
+                                            <tr>
+                                                <td>{{requi.id}}</td>
+                                                <td>{{requi.fecha_pedido}}</td>
+                                                <td>{{requi.fecha_entrega}}</td>
+                                                <td>{{requi.estado}}</td>
+                                                <td>
+                                                    <a href="{% url 'boton_aprobar' requi.id %}" 
+                                                    class="btn btn-sm btn-success" id="aprobar">Aprobar</a>
+                                                    <input type="hidden"  />
+                                                    <a href="{% url 'eliminar1' requi.id %}" role="button" class="btn btn-sm btn-danger">Eliminar</a>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

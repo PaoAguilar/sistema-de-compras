@@ -5,9 +5,8 @@ from apps.personas.models import Departamento, EmpresaProvedora
 
 class RequesionCompra(models.Model):
     #Id default
-    id_articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE, db_column= 'id_articulos')
+    articulos = models.ManyToManyField(Articulo, through='RequesicionArticulo')
     id_departamento = models.ForeignKey(Departamento, on_delete= models.CASCADE, db_column='id_departamento')
-    cantidad_pedido = models.IntegerField()
     fecha_pedido = models.DateField()
     fecha_entrega = models.DateField()
     estado = models.CharField(max_length=30)
@@ -20,6 +19,12 @@ class RequesionCompra(models.Model):
 
     def __str__(self):
         return '%s' % (self.id_articulo)      
+
+class RequesicionArticulo(models.Model):  
+    #id_default
+    articulo = models.ForeignKey(Articulo, on_delete=models.CASCADE)
+    requisicion = models.ForeignKey(RequesionCompra, on_delete=models.CASCADE)
+    cantidad_pedido = models.IntegerField()
 
 class ordenCompra(models.Model):
     #Id default

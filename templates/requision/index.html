@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<script src="{% static 'dist/js/jsrequisicion/indexRequisicion.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<!-- Varible que dispara los sweet alerts -->
+<ul>
+    {% for message in messages %}
+    <input type="text" name="opt" id="opt" value="{{ message }}" hidden>
+    {% endfor %}
+</ul>
+<!-- Varible que dispara los sweet alerts fin -->
+{% endif %}
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-lg-10 offset-lg-1">
+        <div class="card card-dark">
+            <div class="card-header">
+                Listado de requisicion: {{ emple.id_departamento.nombre }}.
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2 offset-lg-10 text-right">
+                        <a class="btn btn-info" href="{% url 'generar_requisicion' %}"  role="button"> <i class="fa fa-plus"
+                                aria-hidden="true"></i>
+                            Nueva requisicion</a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <div class="table-responsive">
+                            <table class="table table-bordered table-striped" id="indexRequisicion">
+                                <thead class="bg-secondary">
+                                    <tr>
+                                        <th>Id</th>
+                                        <th>Fecha pedido</th>
+                                        <th>Fecha entrega</th>
+                                        <th>Estado</th>
+                                        <td>Opciones</td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if requision %}
+                                    {% for requi in requision %}
+                                    <tr>
+                                        <td>{{requi.id}}</td>
+                                        <td>{{requi.fecha_pedido|date:'d-M-Y'}}</td>
+                                        <td>{{requi.fecha_entrega|date:'d-M-Y'}}</td>
+                                        <td>{{requi.estado}}</td>
+                                        <td>
+                                            <div>
+                                                <a href="{% url 'agregar_articulo' requi.id %}"
+                                                    class="btn btn-sm btn-success">
+                                                    Agregar articulos
+                                                </a>
+                                            <a href="{% url 'edit_requision' requi.id %}" class="btn btn-sm btn-secondary">Actualizar</a>
+                                                
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

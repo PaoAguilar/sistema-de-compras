@@ -22,18 +22,21 @@ from apps.personas.models import Departamento
 from django.contrib.auth import views as auth_views
 from django.contrib.auth.decorators import login_required
 
+
 @login_required
 def index(request):
     return render(request, 'pages/index.html')
 
 
 urlpatterns = [
-    path('',auth_views.LoginView.as_view(template_name='account/prueba.html'), name='login'),
+    path('', auth_views.LoginView.as_view(
+        template_name='account/prueba.html'), name='login'),
     path('home/', index, name='home'),
     path('admin/', admin.site.urls),
     path('accounts/', include('apps.usuarios.urls'), name='accounts'),
     path('departamento/', include('apps.personas.urls'),
          name='departamento'),  # /departamento/departamento
-    path('articulo/', include('apps.articulos.urls'), name='articulo')
-    
+    path('articulo/', include('apps.articulos.urls'), name='articulo'),
+    path('compras/', include('apps.compras.urls'), name='compras')
+
 ]
