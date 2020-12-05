@@ -1,5 +1,5 @@
 from django.db import models
-from apps.articulos.models import Articulo, OfertaArticulo
+from apps.articulos.models import Articulo, Oferta
 from apps.personas.models import Departamento, EmpresaProvedora
 # Create your models here.
 
@@ -29,7 +29,7 @@ class RequesicionArticulo(models.Model):
 class ordenCompra(models.Model):
     #Id default
     id_requisicion = models.ForeignKey(RequesionCompra, on_delete= models.CASCADE, db_column='id_requisicion')
-    id_oferta = models.ForeignKey(OfertaArticulo, on_delete= models.CASCADE, db_column='id_oferta')
+    id_oferta = models.ForeignKey(Oferta, on_delete= models.CASCADE, db_column='id_oferta')
     precio_total = models.FloatField()
     fecha_orden = models.DateField()
     fecha_entrega = models.DateField()

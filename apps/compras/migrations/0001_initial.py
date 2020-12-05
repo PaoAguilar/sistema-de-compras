@@ -51,7 +51,7 @@ class Migration(migrations.Migration):
                 ('precio_total', models.FloatField()),
                 ('fecha_orden', models.DateField()),
                 ('fecha_entrega', models.DateField()),
-                ('id_oferta', models.ForeignKey(db_column='id_oferta', on_delete=django.db.models.deletion.CASCADE, to='articulos.OfertaArticulo')),
+                ('id_oferta', models.ForeignKey(db_column='id_oferta', on_delete=django.db.models.deletion.CASCADE, to='articulos.Oferta')),
                 ('id_requisicion', models.ForeignKey(db_column='id_requisicion', on_delete=django.db.models.deletion.CASCADE, to='compras.RequesionCompra')),
             ],
             options={

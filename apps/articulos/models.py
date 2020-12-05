@@ -20,7 +20,7 @@ class Articulo(models.Model):
     def __str__(self):
         return '%s' % (self.nombre)
 
-class OfertaArticulo(models.Model):
+class Oferta(models.Model):
     #id default
     precio = models.FloatField()
     fecha_inicio = models.DateField()

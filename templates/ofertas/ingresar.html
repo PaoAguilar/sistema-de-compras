@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<script src="{% static 'dist/js/jsoferta/ingresarOferta.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-8 offset-2 ">
+            <div class="card card-dark">
+
+                <div class="card-header with-border">
+                    Ingresar Oferta.
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="post" name="formulario">
+                                {% csrf_token %}
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Precio</span>
+                                        </div>
+                                        <input type="number" min="0" class="form-control" id="precio" name="precio" placeholder="Ingrese el precio de la Oferta" required>
+                                    </div>
+                                </div>   
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Fecha Inicio de Oferta</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" placeholder="Ingrese la Fecha de Inicio de Oferta" required>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Fecha Fin de Oferta</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" placeholder="Ingrese la Fecha de Fin de Oferta" required>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Periodo de Gracia</span>
+                                        </div>
+                                        <input type="number" min="0" class="form-control" id="periodo_gracia" name="periodo_gracia" placeholder="Ingrese el Periodo de Gracia de la Oferta" required>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Descuento</span>
+                                        </div>
+                                        <input type="number" max="100" min="0" class="form-control" id="descuento" name="descuento" placeholder="Ingrese el Descuento de la Oferta" required>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Tipo Entrega</span>
+                                        </div>
+                                        <select class="custom-select" id="tipo_entrega" name="tipo_entrega" required>
+                                            <option value="" selected disabled>Elija El Tipo de Entrega</option>
+                                            <option value="Inmediata, En Sucursal">Inmediata, En Sucursal</option>
+                                            <option value="Envio en 1 dia">Envio en 1 dia.</option>
+                                            <option value="Envio en 3 dias habiles">Envio en 3 dias habiles</option>
+                                            <option value="Envio en 5 dias habiles">Envio en 5 dias habiles</option>
+                                            <option value="Envio en 8 dias habiles">Envio en 8 dias habiles</option>
+                                            <option value="Envio en 15 dias habiles">Envio en 15 dias habiles</option>
+                                            <option value="A negociar por correo">A negociar por correo</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Articulo</span>
+                                        </div>
+                                        <select class="custom-select" id="id_articulo" name="id_articulo" required>
+                                            <option value="" selected disabled>Elija el Articulo</option>
+                                            {% if articulos %}
+                                            {% for articulo in articulos %}
+                                            <option value="{{ articulo.id }}">{{ articulo.id }}. {{ articulo.nombre }}, {{ articulo.modelo }}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Proveedor</span>
+                                        </div>
+                                        <select class="custom-select" id="id_provedora" name="id_provedora" required>
+                                            <option value="" selected disabled>Proveedor</option>
+                                            <option value="{{ empleados.id }}">{{ empleados.id }}. {{ empleados.nombre }}</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </form>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-lg-4 offset-lg-7 text-right">
+                            <a href="{% url 'indexOferta' %}" role="button" class="btn btn-danger">Cancelar</a>
+                            <button type="submit" id="guardar" name="guardar" class="btn btn-info">Guardar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
