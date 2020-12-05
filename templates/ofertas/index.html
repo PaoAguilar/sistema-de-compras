@@ -1,0 +1,88 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block header %}
+<script src="{% static 'dist/js/jsoferta/indexOfertas.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+{% if messages %}
+<!-- Varible que dispara los sweet alerts -->
+<ul>
+    {% for message in messages %}
+    <input type="text" name="opt" id="opt" value="{{ message }}" hidden>
+    {% endfor %}
+</ul>
+<!-- Varible que dispara los sweet alerts fin -->
+{% endif %}
+<br>
+<br>
+<br>
+<div class="row">
+    <div class="col-10 offset-1">
+        <div class="card card-dark">
+            <div class="card-header">
+                Lista de ofertas Realizadas
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-2 offset-lg-10 text-right">
+                        <a class="btn btn-info" href="{% url 'oferta_crear' %}" role="button"> <i class="fa fa-plus"
+                                aria-hidden="true"></i>
+                            Agregar</a>
+                    </div>
+                </div>
+                <br>
+                <div class="row">
+                    <div class="col align-self-center">
+                        <div class="table-responsive">
+                            <table class="table display table-bordered table-striped" name="indexOferta"
+                                id="indexOferta">
+                                <thead class="bg-secondary">
+                                    <tr>
+                                    	<td>No</td>
+                                        <td>Precio</td>
+                                        <td>Inicio Oferta</td>
+                                        <td>Fin Oferta</td>
+                                        <td>Periodo de Gracia</td>
+                                        <td>Descuento %</td>
+                                        <td>Tipo Entrega</td>
+                                        <td>Articulo</td>
+                                        <td>Proveedor</td>
+                                        <td>Opciones</td>                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {% if ofertas %}
+                                    {% for ofertasregistradas in ofertas %}
+                                    <tr>
+                                        <td> {{ ofertasregistradas.id }}</td>
+                                        <td> {{ ofertasregistradas.precio }}</td>
+                                        <td> {{ ofertasregistradas.fecha_inicio }}</td>
+                                        <td> {{ ofertasregistradas.fecha_fin }}</td>
+                                        <td> {{ ofertasregistradas.periodo_gracia }}</td>
+                                        <td> {{ ofertasregistradas.descuento }}</td>
+                                        <td> {{ ofertasregistradas.tipo_entrega }}</td>
+                                        <td> {{ ofertasregistradas.id_articulo }}</td>
+                                        <td> {{ ofertasregistradas.id_provedora }}</td>
+                                        <td>
+                                            <div class="btn-group">
+                                                <a href="{% url 'oferta_editar' ofertasregistradas.id %}"
+                                                    class="btn btn-sm btn-success">Actualizar</a>
+                                                <a href="{% url 'oferta_eliminar' ofertasregistradas.id %}"
+                                                    class="btn btn-sm btn-danger">Eliminar</a>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                    {% endif %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -31,7 +31,7 @@ class Migration(migrations.Migration):
             },
         ),
         migrations.CreateModel(
-            name='OfertaArticulo',
+            name='Oferta',
             fields=[
                 ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('precio', models.FloatField()),
@@ -40,7 +40,7 @@ class Migration(migrations.Migration):
                 ('periodo_gracia', models.IntegerField()),
                 ('descuento', models.IntegerField()),
                 ('tipo_entrega', models.CharField(max_length=25)),
-                ('id_articulo', models.ForeignKey(db_column='id_articulos', on_delete=django.db.models.deletion.CASCADE, to='articulos.Articulo')),
+                ('id_articulos', models.ForeignKey(db_column='id_articulos', on_delete=django.db.models.deletion.CASCADE, to='articulos.Articulo')),
                 ('id_provedora', models.ForeignKey(db_column='id_provedora', on_delete=django.db.models.deletion.CASCADE, to='personas.EmpresaProvedora')),
             ],
             options={
