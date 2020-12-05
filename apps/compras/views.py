@@ -12,7 +12,6 @@ from django.http import HttpResponseRedirect, HttpResponse
 def indexRequision(request):
     user = request.user.id
     emple = Empleado.objects.get(auth_id=user)
-    # valorar si hacer una relacion con empleado para ver solo el que el usuario crea
     requisioncreadas = RequesionCompra.objects.filter(
         id_departamento=emple.id_departamento.id, estado="Solicitado")
     contexto = {'requision': requisioncreadas}
@@ -69,15 +68,35 @@ def AprobarRequision(request):
     emple = Empleado.objects.get(auth_id=user)
     # valorar si hacer una relacion con empleado para ver solo el que el usuario crea
     requisioncreadas = RequesionCompra.objects.filter(
-        id_departamento=emple.id_departamento.id)
-    contexto = {'requision': requisioncreadas}
+        id_departamento=emple.id_departamento.id, estado="Solicitado" )
+    contexto = {'requision': requisioncreadas,
+                'emple': emple}
     return render(request, 'requision/aprobar.html', contexto)
+
+def RequisionAprobadas(request):
+    user = request.user.id
+    emple = Empleado.objects.get(auth_id=user)
+    # valorar si hacer una relacion con empleado para ver solo el que el usuario crea
+    requisioncreadas = RequesionCompra.objects.filter(
+        id_departamento=emple.id_departamento.id, estado="Aprobado" )
+    contexto = {'requision': requisioncreadas,
+                'emple': emple}
+    return render(request, 'requision/cancelar.html', contexto)
+
 
 
 def botonAprobar(request, id_requisicion):
     if request.method == 'GET':
         requi = RequesionCompra.objects.get(id=id_requisicion)
         requi.estado = "Aprobado"
+        requi.save()
+        messages.success(request, '1')
+        return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+def botonCancelar(request, id_requisicion):
+    if request.method == 'GET':
+        requi = RequesionCompra.objects.get(id=id_requisicion)
+        requi.estado = "Solicitado"
         requi.save()
         messages.success(request, '1')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))

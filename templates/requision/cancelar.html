@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block header %}
-<script src="{% static 'dist/js/jsrequisicion/aprobarArticuloRequisicion.js' %}"></script>
+<script src="{% static 'dist/js/jsrequisicion/cancelarArticuloRequisicion.js' %}"></script>
 {% endblock %}
 
 {% block content %}
@@ -22,11 +22,9 @@
     <div class="col-lg-10 offset-lg-1">
         <div class="card card-dark">
             <div class="card-header">
-                <h5>Listado de requisiciones por aprobar: {{ emple.id_departamento.nombre }}.</h5>
-                
+                <h5>Listado de requisiciones Aprobadas: {{ emple.id_departamento.nombre }}..</h5>
             </div>
             <br>
-            
             <div class="col-lg-10 offset-1">
                 <div class="card card-secondary card-outline border-secondary">
                     <div class="card-body">
@@ -52,8 +50,8 @@
                                                 <td>{{requi.fecha_entrega}}</td>
                                                 <td>{{requi.estado}}</td>
                                                 <td>
-                                                    <a href="{% url 'boton_aprobar' requi.id %}" 
-                                                    class="btn btn-sm btn-success" id="aprobar">Aprobar</a>
+                                                    <a href="{% url 'boton_cancelar' requi.id %}" 
+                                                    class="btn btn-sm btn-danger" id="eliminar">Cancelar</a>
                                                     <input type="hidden"  />
                                                 </td>
                                             </tr>
