@@ -15,7 +15,7 @@
             <div class="card card-dark">
 
                 <div class="card-header with-border">
-                    Editar departamento.
+                    Editar empresa proveedora.
                 </div>
 
                 <div class="card-body">
@@ -28,7 +28,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Nombre proveedor</span>
                                         </div>
-                                        <input type="text" class="form-control" id="nombre" name="nombre" value="{{ empresaProveedora.nombre }}" required>
+                                        <input type="text" class="form-control" id="nombre" name="nombre"
+                                        placeholder="Ingrese el nombre de la empresa proveedora" value="{{ empresaProveedora.nombre }}" required>
                                     </div>
                                 </div>   
                                 <div class="row form-group">
@@ -36,7 +37,9 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Telefono</span>
                                         </div>
-                                        <input type="number" class="form-control" id="telefono" name="telefono" value="{{ empresaProveedora.telefono }}" required>
+                                        <input type="text" class="form-control" id="telefono" name="telefono" 
+                                        placeholder="Ingrese el número de la empresa proveedora"
+                                        data-inputmask='"mask": "9999-9999"' data-mask value="{{ empresaProveedora.telefono }}" required>
                                     </div>
                                 </div> 
                                 <div class="row form-group">
@@ -45,7 +48,7 @@
                                             <span class="input-group-text">Dirección</span>
                                         </div>
                                         <input type="text" class="form-control" id="direccion" name="direccion"
-                                            placeholder="Ingrese la dirección" value="{{ empresaProveedora.direccion }}" required>
+                                            placeholder="Ingrese la dirección de la empresa proveedora" value="{{ empresaProveedora.direccion }}" required>
                                     </div>
                                 </div>
                                 <div class="row form-group">
@@ -92,7 +95,9 @@
                                             <span class="input-group-text">Usuario</span>
                                         </div>
                                         <select class="custom-select" id="usersis" name="usersis" required>
-                                            <option value="" selected>Elija el usuario</option>
+                                            <option value="{{empresaProveedora.auth_id_id}}" selected>
+                                                {{empresaProveedora.auth_id.first_name}}
+                                            </option>
                                             {% if usuarios %}
                                             {% for userdispo in usuarios %}
                                             <option value="{{ userdispo.id }}">{{ userdispo.first_name }}</option>

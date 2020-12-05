@@ -192,9 +192,9 @@
                                             <option value="{{empleado.auth_id_id}}" selected>
                                                 {{empleado.auth_id.first_name}}</option>
                                             {% if usuarios %}
-                                                {% for userdispo in usuarios %}
-                                                    <option value="{{ userdispo.id }}">{{ userdispo.first_name }}</option>
-                                                {% endfor %}
+                                            {% for userdispo in usuarios %}
+                                                <option value="{{ userdispo.id }}">{{ userdispo.first_name }}</option>
+                                            {% endfor %}
                                             {% endif %}
                                         </select>
                                     </div>

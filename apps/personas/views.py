@@ -54,7 +54,7 @@ def departamento_eliminar(request, id_depto):
 
     return redirect('indexDepartamento')
 
-####################################### DEPARTAMENTOS ####################################
+####################################### EMPRESA PROVEEDORA ####################################
 
 
 def indexEmpresaProveedora(request):
@@ -104,7 +104,7 @@ def empresaProveedora_edit(request, id_proveedor):
 
         contexto = {
             'empresaProveedora': proveedor,
-            'usuarios': usersdispo,    
+            'usuarios': usersdispo,
             'departamentos': depart,
             'municipios': muni
         }

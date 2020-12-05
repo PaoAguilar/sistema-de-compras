@@ -32,7 +32,7 @@ $(document).ready(function () {
                 subtitle: 'Error en el registro',
                 body: 'No se ha ingresado el nombre'
             });
-        } else if (dep.length == 0 || dep.trim() == "" || muni.length == 0 || muni.trim() == "" || direccion.length == 0 || direccion.trim() == "") {
+        } else if (telefono.length == 0 || telefono.trim() == "") {
             $(document).Toasts('create', {
                 class: 'bg-danger',
                 title: 'Empresa proveedora',
@@ -40,7 +40,27 @@ $(document).ready(function () {
                 delay: 4000,
                 autohide: true,
                 subtitle: 'Error en el registro',
-                body: 'No se ha ingresado todos los datos referentes a la direccion'
+                body: 'No se ha ingresado el telefono de la empresa proveedora'
+            });
+        } else if (direccion.length == 0 || direccion.trim() == "") {
+            $(document).Toasts('create', {
+                class: 'bg-danger',
+                title: 'Empresa proveedora',
+                fade: true,
+                delay: 4000,
+                autohide: true,
+                subtitle: 'Error en el registro',
+                body: 'No se ha ingresado la direccion de la empresa proveedora'
+            });
+        } else if (dep.length == 0 || dep.trim() == "" || muni.length == 0 || muni.trim() == "") {
+            $(document).Toasts('create', {
+                class: 'bg-danger',
+                title: 'Empresa proveedora',
+                fade: true,
+                delay: 4000,
+                autohide: true,
+                subtitle: 'Error en el registro',
+                body: 'No se ha ingresado el departamento o municipio'
             });
         } else if (usersis.length == 0 || usersis.trim() == "") {
             $(document).Toasts('create', {
