@@ -14,7 +14,8 @@ def indexRequision(request):
     emple = Empleado.objects.get(auth_id=user)
     requisioncreadas = RequesionCompra.objects.filter(
         id_departamento=emple.id_departamento.id, estado="Solicitado")
-    contexto = {'requision': requisioncreadas}
+    contexto = {'requision': requisioncreadas,
+                'emple': emple}
     return render(request, 'requision/index.html', contexto)
 
 
@@ -38,6 +39,27 @@ def generarRequision(request):
                     }
         return render(request, 'requision/generar.html', contexto)
 
+def edit_requision(request, id_requisicion):
+    user = request.user.id
+    requesion = RequesionCompra.objects.get(pk=id_requisicion)
+    empleado = Empleado.objects.get(auth_id=user)
+    if request.method=='POST':
+        fecha_pedido = request.POST.get('fecha_pedido')
+        fecha_entrega = request.POST.get('fecha_entrega')
+
+        requesion.fecha_entrega = fecha_entrega
+        requesion.fecha_pedido = fecha_pedido
+        requesion.estado = 'Solicitado'
+        requesion.id_departamento_id = empleado.id_departamento.id
+        requesion.save()
+        messages.success(request, '2')
+        return redirect('indexRequision')
+    elif request.method == 'GET':
+        contexto = {'empleado': empleado,
+                    'requision': requesion
+                    }                            
+        return render(request, 'requision/editarReq.html', contexto)
+                    
 
 def generarRequisionArti(request, id_requisicion):
     if request.method == 'POST':
@@ -66,7 +88,6 @@ def generarRequisionArti(request, id_requisicion):
 def AprobarRequision(request):
     user = request.user.id
     emple = Empleado.objects.get(auth_id=user)
-    # valorar si hacer una relacion con empleado para ver solo el que el usuario crea
     requisioncreadas = RequesionCompra.objects.filter(
         id_departamento=emple.id_departamento.id, estado="Solicitado" )
     contexto = {'requision': requisioncreadas,
@@ -76,7 +97,6 @@ def AprobarRequision(request):
 def RequisionAprobadas(request):
     user = request.user.id
     emple = Empleado.objects.get(auth_id=user)
-    # valorar si hacer una relacion con empleado para ver solo el que el usuario crea
     requisioncreadas = RequesionCompra.objects.filter(
         id_departamento=emple.id_departamento.id, estado="Aprobado" )
     contexto = {'requision': requisioncreadas,
@@ -100,3 +120,13 @@ def botonCancelar(request, id_requisicion):
         requi.save()
         messages.success(request, '1')
         return HttpResponseRedirect(request.META.get('HTTP_REFERER'))
+
+
+def requisicion_eliminar1(request, id_requisicion):
+    if request.method == 'GET':
+        requi = RequesionCompra.objects.get(id=id_requisicion)
+        requi.delete()
+        messages.success(request, '2')
+
+    return redirect('aprobarRequision')
+

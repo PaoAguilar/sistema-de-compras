@@ -40,6 +40,13 @@ $(document).ready(function() {
                 'success'
             );
             break;
+        case '2':
+            Swal.fire(
+              'Requisicion',
+              "Se elimino con exito!",
+              'success'
+          );
+          break;
     }
 });
 
