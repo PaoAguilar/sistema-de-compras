@@ -1,0 +1,101 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-8 offset-2 ">
+            <div class="card card-info">
+
+                <div class="card-header with-border">
+                    Generar Orden de compra.
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="post" name="form_ingresar" >
+                                {% csrf_token %}
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Fecha de orden</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecha_orden" name="fecha_orden" data-mask="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Fecha de entrega</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecha_entrega" name="fecha_entrega" data-mask="" required>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-10 offset-lg-1">
+                                        <label>Seleccione Articulos ofertados</label>
+                                        <table class="table" id="tablaOfertas" name="tablaOfertas">
+                                            <thead class="bg-info">
+                                            <tr>
+                                                <td>Nombre</td>
+                                                <td>Marca</td>
+                                                <td>Modelo</td>
+                                                <td>Precio</td>
+                                                <td>descuento</td>
+                                                <td>Fecha inicio</td>
+                                                <td>Fecha fin</td>
+                                                <td>Opciones</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if oferta %}
+                                            {% for ofer in oferta %}
+                                            <tr>
+                                                <td>{{ofer.id_articulo.nombre}} </td>
+                                                <td>{{ofer.id_articulo.marca}} </td>
+                                                <td>{{ofer.id_articulo.modelo}} </td>
+                                                <td>{{ofer.precio}} </td>
+                                                <td>{{ofer.descuento}} </td>
+                                                <td>{{ofer.fecha_inicio}} </td>
+                                                <td>{{ofer.fecha_fin}} </td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input" name="ofertas" id="{{ofer.id}}"
+                                                                   value="{{ofer.id}}">
+                                                            Seleccionar
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 offset-lg-7 text-right">
+                                        <a href="{% url 'indexOferta' %}" role="button" class="btn btn-danger">Cancelar</a>
+                                        <button type="submit" id="guardar" name="guardar" class="btn btn-info">Guardar</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+

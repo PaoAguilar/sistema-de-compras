@@ -28,6 +28,7 @@ def generarRequision(request):
         new_requision.fecha_entrega = request.POST.get('fecha_entrega')
         new_requision.fecha_pedido = request.POST.get('fecha_pedido')
         new_requision.estado = 'Solicitado'
+        new_requision.comprahecha = "Sin generar"
         new_requision.id_departamento_id = empleado.id_departamento.id
         new_requision.save()
         messages.success(request, '1')
@@ -156,3 +157,38 @@ def requisicion_eliminar1(request, id_requisicion):
 
 
 
+###----------------------------------ORDEN DE COMPRA-----------------------------------------------###
+
+
+def indexCompras(request):
+    requisioncreadas = RequesionCompra.objects.filter(estado="Aprobado", comprahecha="Sin generar")
+    contexto = {'requision': requisioncreadas,
+                }
+    return render(request, 'compra/index.html', contexto)
+
+
+def indexComprasgeneradas(request):
+    requisioncreadas = RequesionCompra.objects.filter(comprahecha="Generada")
+    contexto = {'requision': requisioncreadas,
+                }
+    return render(request, 'compra/indexgenerada.html', contexto)
+
+def generarOrden(request):
+    if request.method == 'GET':
+        oferta = Oferta.objects.all()
+        contexto = {'oferta': oferta}
+        return render(request,'compra/generar.html',contexto)
+    
+    elif request.method == 'POST':
+        ofertas = Oferta.objects.filter(id__in = request.POST.getlist('ofertas'))
+        new_compra = ordenCompra()
+        new_compra.id_requisicion_id = 1
+        new_compra.fecha_orden = request.POST.get('fecha_orden')
+        new_compra.fecha_entrega = request.POST.get('fecha_entrega')
+        new_compra.precio_total = 100 #ya lo voy a calcular
+        new_compra.save()
+        if len(ofertas) > 0:
+            new_compra.ofertas.add(*ofertas)
+        messages.success(request,1)
+        print(ofertas)
+        return redirect('indexcompras')

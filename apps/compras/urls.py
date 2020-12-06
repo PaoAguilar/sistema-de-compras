@@ -14,4 +14,8 @@ urlpatterns = [
     path('requisicion/aprobar/<int:id_requisicion>/botton/', botonAprobar, name='boton_aprobar'),
     path('requisicion/cancelar/<int:id_requisicion>/botton/', botonCancelar, name='boton_cancelar'),
     path('requisicion/aprobar/<int:id_requisicion>/eliminar/', requisicion_eliminar1, name='eliminar1'),
+    ###------------------Compras-----------------------------##
+    path('ordencompra/', indexCompras, name = 'indexcompras'),
+    path('ordencompra/generada/', indexComprasgeneradas, name = 'indexgeneradas'),
+    path('ordencompra/generar/', generarOrden, name = 'generarOrden'),
     ]

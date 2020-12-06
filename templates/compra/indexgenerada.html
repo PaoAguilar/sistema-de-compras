@@ -1,0 +1,135 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class="container">
+    <div class="row align-items-center">
+        <div class="col-8 offset-2 ">
+            <div class="card card-info">
+
+                <div class="card-header with-border">
+                    Generar Orden de compra.
+                </div>
+
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-12">
+                            <form method="post" name="form_ingresar" action="{% url 'turno_crear' %}">
+                                {% csrf_token %}
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Nombre</span>
+                                        </div>
+                                        <input type="text" class="form-control" id="nombre" name="nombre" required
+                                        placeholder="Ingrese el nombre del turno">
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Fecha de inicio</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecha_inicio" name="fecha_inicio" data-mask="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1 ">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Fecha de fin</span>
+                                        </div>
+                                        <input type="date" class="form-control" id="fecha_fin" name="fecha_fin" data-mask="" required>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Hora de inicio</span>
+                                        </div>
+                                        <input class="form-control" type="time" id="hora_inicio" name="hora_inicio" max="17:00:00" min="06:00:00"
+                                               step="60" required>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Hora de fin</span>
+                                        </div>
+                                        <input class="form-control" type="time" id="hora_fin" name="hora_fin" max="18:00:00" min="07:00:00"
+                                               step="60" required>
+                                    </div>
+                                </div>
+
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Capacidad</span>
+                                        </div>
+                                        <input class="form-control" type="number" id="capacidad" name="capacidad" required
+                                               placeholder="Ingrese el máximo de pacientes que atenderá cada doctor">
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-10 offset-lg-1">
+                                        <label>Seleccione al personal asignado a este turno</label>
+                                        <table class="table" id="tablaDoctores" name="tablaDoctores">
+                                            <thead class="bg-info">
+                                            <tr>
+                                                <td>Nombres</td>
+                                                <td>Apellidos</td>
+                                                <td>Especialidad</td>
+                                                <td>Opciones</td>
+                                            </tr>
+                                            </thead>
+                                            <tbody>
+                                            {% if doctores %}
+                                            {% for doctor in doctores %}
+                                            <tr>
+                                                <td>{{doctor.id_persona.primer_nombre}} {{doctor.id_persona.segundo_nombre }}</td>
+                                                <td>{{doctor.id_persona.primer_apellido }} {{doctor.id_persona.segundo_apellido}}</td>
+                                                <td>{{doctor.id_especialidad.nombre_especialidad}}</td>
+                                                <td>
+                                                    <div class="form-check">
+                                                        <label class="form-check-label">
+                                                            <input type="checkbox" class="form-check-input" name="doctores" id="{{doctor.id}}"
+                                                                   value="{{doctor.id}}">
+                                                            Seleccionar
+                                                        </label>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            {% endfor %}
+                                            {% endif %}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+
+                                <div class="row">
+                                    <div class="col-lg-4 offset-lg-7 text-right">
+                                        <a href="{% url 'indexTurno' %}" role="button" class="btn btn-danger">Cancelar</a>
+                                        <button type="submit" id="guardar" name="guardar" class="btn btn-info">Guardar</button>
+                                    </div>
+                                </div>
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+{% endblock %}
+
