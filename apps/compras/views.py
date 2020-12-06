@@ -103,7 +103,25 @@ def RequisionAprobadas(request):
                 'emple': emple}
     return render(request, 'requision/cancelar.html', contexto)
 
+def detalleRequesicion(request, id_requisicion):
+    requision = RequesionCompra.objects.get(pk=id_requisicion)
+    rearticulo = RequesicionArticulo.objects.filter(requisicion_id=id_requisicion)
+    user = request.user.id
+    emple = Empleado.objects.get(auth_id=user)
+    contexto = {'requision': requision,
+                'rearticulo': rearticulo,
+                'emple': emple}
+    return render(request, 'requision/detalle2.html', contexto)
 
+def detalleRequesicion2(request, id_requisicion):
+    requision = RequesionCompra.objects.get(pk=id_requisicion)
+    rearticulo = RequesicionArticulo.objects.filter(requisicion_id=id_requisicion)
+    user = request.user.id
+    emple = Empleado.objects.get(auth_id=user)
+    contexto = {'requision': requision,
+                'rearticulo': rearticulo,
+                'emple': emple}
+    return render(request, 'requision/detalle.html', contexto)    
 
 def botonAprobar(request, id_requisicion):
     if request.method == 'GET':
