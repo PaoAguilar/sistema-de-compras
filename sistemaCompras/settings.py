@@ -41,7 +41,7 @@ INSTALLED_APPS = [
     'apps.compras',
     'apps.articulos',
     'apps.usuarios',
-    'django_seed',
+    #'django_seed',
 ]
 
 MIDDLEWARE = [
@@ -81,9 +81,11 @@ WSGI_APPLICATION = 'sistemaCompras.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-        'NAME': 'localhost/ORCLCDB.localdomain',
-        'USER': 'alexander',
-        'PASSWORD': 'localhost',
+        'NAME': 'ORACLE',
+        'USER': 'doris',
+        'PASSWORD': 'doris',
+        'HOST': '127.0.0.1',
+        'PORT': '1521'
     }
 }
 
