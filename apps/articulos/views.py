@@ -64,3 +64,71 @@ def articulo_eliminar(request, id_articulo):
         messages.success(request, '3')
 
     return redirect('indexArticulo')
+
+#INVENTARIO
+
+def indexInventario(request):
+    inventarioArticulos = Inventario.objects.all()
+    contexto = {'inventarios': inventarioArticulos}
+    return render(request, 'inventario/index.html', contexto)
+
+def indexMovimiento(request,id_inventario):
+    movimientosInventario = Movimiento.objects.filter(id_inventario_id = id_inventario)
+    inventario= Inventario.objects.get(id=id_inventario)
+    contexto = {'movimientos': movimientosInventario,
+                'inventario': inventario  }
+    return render(request, 'inventario/indexMovimiento.html', contexto)
+
+def movimiento_crear(request, id_inventario):
+    inventario = Inventario.objects.get(id=id_inventario)
+    if request.method == 'POST':
+        cantidad = int(request.POST.get('cantidad'))
+        costo = float(request.POST.get('costo_unitario'))
+        tipo = int(request.POST.get('tipo'))
+        fecha = request.POST.get('fecha')
+
+        existenciaActual = inventario.existencia
+        costoActual = inventario.costo_promedio
+
+        if(tipo == 1):
+
+            inventario.existencia = existenciaActual + cantidad
+            inventario.costo_promedio = ((existenciaActual*costoActual)+(cantidad*costo))/inventario.existencia
+        else:
+            inventario.existencia = inventario.existencia - cantidad
+            inventario.costo_promedio = ((existenciaActual*costoActual)-(cantidad*costo))/inventario.existencia
+
+        new_movimiento= Movimiento()
+        new_movimiento.cantidad = cantidad
+        new_movimiento.tipo = tipo
+        new_movimiento.costo = costo
+        new_movimiento.id_inventario_id = id_inventario
+        
+        new_movimiento.save()
+        inventario.save()
+        messages.success(request, '1')
+        return redirect('indexInventario')
+    elif request.method == 'GET':
+        contexto = {'inventario': inventario}
+        return render(request, 'inventario/ingresar.html', contexto)
+
+def movimiento_eliminar(request, id_movimiento):
+    if request.method == 'GET':
+        movimiento = Movimiento.objects.get(id=id_movimiento)
+        id_inventario = movimiento.id_inventario_id
+        inventario = Inventario.objects.get(id=id_inventario)
+
+        existenciaActual = inventario.existencia
+        costoActual = inventario.costo_promedio
+
+        if(movimiento.tipo == 1):
+            inventario.existencia = inventario.existencia - movimiento.cantidad
+            inventario.costo_promedio = ((existenciaActual*costoActual)-(movimiento.cantidad*movimiento.costo))/inventario.existencia
+        else:
+            inventario.existencia = inventario.existencia + movimiento.cantidad
+            inventario.costo_promedio = ((existenciaActual*costoActual)+(movimiento.cantidad*movimiento.costo))/inventario.existencia
+        inventario.save()
+        movimiento.delete()
+        messages.success(request, '3')
+
+    return redirect('indexInventario')
