@@ -176,11 +176,15 @@ def indexComprasgeneradas(request):
 def generarOrden(request):
     if request.method == 'GET':
         oferta = Oferta.objects.all()
-        contexto = {'oferta': oferta}
+        #requi = RequesionCompra.objects.get(pk= id_requesicion)
+        contexto = {'oferta': oferta,
+                    }
         return render(request,'compra/generar.html',contexto)
     
     elif request.method == 'POST':
         ofertas = Oferta.objects.filter(id__in = request.POST.getlist('ofertas'))
+        
+
         new_compra = ordenCompra()
         new_compra.id_requisicion_id = 1
         new_compra.fecha_orden = request.POST.get('fecha_orden')

@@ -17,5 +17,5 @@ urlpatterns = [
     ###------------------Compras-----------------------------##
     path('ordencompra/', indexCompras, name = 'indexcompras'),
     path('ordencompra/generada/', indexComprasgeneradas, name = 'indexgeneradas'),
-    path('ordencompra/generar/', generarOrden, name = 'generarOrden'),
+    path('ordencompra/generar/crear', generarOrden, name = 'generarOrden'),
     ]
