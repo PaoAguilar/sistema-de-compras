@@ -216,7 +216,7 @@ def movimiento_eliminar(request, id_movimiento):
             inventario.existencia = inventario.existencia - movimiento.cantidad
             inventario.costo_promedio = ((existenciaActual*costoActual)-(movimiento.cantidad*movimiento.costo))/inventario.existencia
         else:
-            if(inventario.existencia - cantidad >= 0 ):
+            if(inventario.existencia - movimiento.cantidad >= 0 ):
                 inventario.existencia = inventario.existencia + movimiento.cantidad
                 inventario.costo_promedio = ((existenciaActual*costoActual)+(movimiento.cantidad*movimiento.costo))/inventario.existencia
             else:
