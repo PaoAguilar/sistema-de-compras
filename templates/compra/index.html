@@ -52,15 +52,16 @@
                                         <td>{{requi.comprahecha}}</td>
                                         <td>{{requi.estado}}</td>
                                         <td>
-                                        
+                                            
                                             <div>
-                                                <a href="{% url 'generarOrden'  %}"
+                                                <a href="{% url 'detalle_requisicion3' requi.id %}"
                                                     class="btn btn-sm btn-success">
-                                                    Generar compra
-                                                </a>    
+                                                    Generar orden
+                                                </a>
+                                            
+                                                
                                             </div>
-                                        </td> 
-    
+                                        </td>
                                     </tr>
                                     {% endfor %}
                                     {% endif %}

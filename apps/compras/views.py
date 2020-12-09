@@ -173,26 +173,32 @@ def indexComprasgeneradas(request):
                 }
     return render(request, 'compra/indexgenerada.html', contexto)
 
-def generarOrden(request):
-    if request.method == 'GET':
-        oferta = Oferta.objects.all()
-        #requi = RequesionCompra.objects.get(pk= id_requesicion)
-        contexto = {'oferta': oferta,
-                    }
-        return render(request,'compra/generar.html',contexto)
-    
-    elif request.method == 'POST':
-        ofertas = Oferta.objects.filter(id__in = request.POST.getlist('ofertas'))
-        
 
+def detalleRequesicion3(request, id_requisicion):
+    if request.method == 'GET':
+        requision = RequesionCompra.objects.get(pk=id_requisicion)
+        rearticulo = RequesicionArticulo.objects.filter(requisicion_id=id_requisicion)
+        oferta = Oferta.objects.all()
+        contexto = {'requision': requision,
+                    'rearticulo': rearticulo,
+                    'oferta': oferta
+                    }
+        return render(request, 'compra/detalle.html', contexto) 
+
+    elif request.method == 'POST':
+        ofertas = Oferta.objects.filter(id__in = request.POST.getlist('ofertas'))       
+        requi = RequesionCompra.objects.get(pk=id_requisicion)
         new_compra = ordenCompra()
-        new_compra.id_requisicion_id = 1
+        new_compra.id_requisicion_id = requi.id
         new_compra.fecha_orden = request.POST.get('fecha_orden')
         new_compra.fecha_entrega = request.POST.get('fecha_entrega')
-        new_compra.precio_total = 100 #ya lo voy a calcular
+        new_compra.precio_total = 100 #falta calcular
         new_compra.save()
         if len(ofertas) > 0:
             new_compra.ofertas.add(*ofertas)
+        requi.comprahecha = "Generada"
+        requi.save()
         messages.success(request,1)
         print(ofertas)
         return redirect('indexcompras')
+
