@@ -16,6 +16,8 @@ from apps.reportes.models import Requision
 from apps.reportes.models import ReqArticulo
 from django.db import connection
 
+from datetime import datetime
+
 
 class reporteArtDepto(View):
     def get(self, request, *args, **kwargs):
@@ -65,8 +67,9 @@ class reporteArtProvee(View):
             'titulo': 'esto es un pdf',
             }
             
-            articulos = Art.objects.raw('SELECT a.ID AS ID, ep.NOMBRE, a.nombre AS articulos, a.marca,a.modelo, o.PRECIO FROM OFERTA o, ARTICULO a, "EMPRESA PROVEEDORA" ep WHERE o.ID_ARTICULOS=a.ID AND o.ID_PROVEDORA=ep.ID')
-            context = {'articulo': articulos}
+            articulos = Art.objects.raw('SELECT a.ID AS ID, ep.NOMBRE, a.nombre AS articulos, o.FECHA_FIN, o.FECHA_INICIO, a.marca,a.modelo, o.PRECIO FROM OFERTA o, ARTICULO a, "EMPRESA PROVEEDORA" ep WHERE o.ID_ARTICULOS=a.ID AND o.ID_PROVEDORA=ep.ID')
+            fechas = datetime.now()
+            context = {'articulo': articulos, 'fecha': fechas}
             html = template.render(context)
             response: HttpResponse = HttpResponse(content_type='application/pdf')
             #response['Content-Disposition'] = 'attachment; filename="reporte1.pdf"'
