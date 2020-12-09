@@ -9,8 +9,11 @@ urlpatterns = [
          articulo_edit, name='articulo_editar'),
     path('articulo/<int:id_articulo>/eliminar/',
          articulo_eliminar, name='articulo_eliminar'),
-
-    # URLS QUE MANEJAN Las Ofertas
+     
+     path('inventario/', indexInventario, name='indexInventario'),
+     path('inventario/<int:id_inventario>/movimiento/', indexMovimiento, name='indexMovimiento'),
+     path('inventario/<int:id_inventario>/movimiento/crear', movimiento_crear, name='movimiento_crear'),
+     path('inventario/<int:id_movimiento>/movimiento/eliminar', movimiento_eliminar, name='movimiento_eliminar'),
     path('oferta/', indexOferta, name='indexOferta'),
     path('oferta/crear/', oferta_create, name='oferta_crear'),
     path('oferta/editar/<int:id_oferta>/',
@@ -18,3 +21,4 @@ urlpatterns = [
     path('oferta/<int:id_oferta>/eliminar/',
          oferta_eliminar, name='oferta_eliminar'),
 ]
+     
