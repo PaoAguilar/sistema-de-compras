@@ -91,12 +91,16 @@ def movimiento_crear(request, id_inventario):
         costoActual = inventario.costo_promedio
 
         if(tipo == 1):
-
             inventario.existencia = existenciaActual + cantidad
             inventario.costo_promedio = ((existenciaActual*costoActual)+(cantidad*costo))/inventario.existencia
         else:
-            inventario.existencia = inventario.existencia - cantidad
-            inventario.costo_promedio = ((existenciaActual*costoActual)-(cantidad*costo))/inventario.existencia
+            if(inventario.existencia - cantidad > 0 ):
+                inventario.existencia = inventario.existencia - cantidad
+                inventario.costo_promedio = ((existenciaActual*costoActual)-(cantidad*costo))/inventario.existencia
+            else:
+                messages.error(request, 'EXISTENCIA 0')
+                return redirect('indexInventario')
+            
 
         new_movimiento= Movimiento()
         new_movimiento.cantidad = cantidad
@@ -125,8 +129,12 @@ def movimiento_eliminar(request, id_movimiento):
             inventario.existencia = inventario.existencia - movimiento.cantidad
             inventario.costo_promedio = ((existenciaActual*costoActual)-(movimiento.cantidad*movimiento.costo))/inventario.existencia
         else:
-            inventario.existencia = inventario.existencia + movimiento.cantidad
-            inventario.costo_promedio = ((existenciaActual*costoActual)+(movimiento.cantidad*movimiento.costo))/inventario.existencia
+            if(inventario.existencia - cantidad >= 0 ):
+                inventario.existencia = inventario.existencia + movimiento.cantidad
+                inventario.costo_promedio = ((existenciaActual*costoActual)+(movimiento.cantidad*movimiento.costo))/inventario.existencia
+            else:
+                messages.error(request, 'EXISTENCIA 0')
+                return redirect('indexInventario')
         inventario.save()
         movimiento.delete()
         messages.success(request, '3')
