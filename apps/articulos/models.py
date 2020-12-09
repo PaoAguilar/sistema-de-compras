@@ -61,7 +61,7 @@ class Movimiento(models.Model):
     cantidad = models.IntegerField()
     tipo = models.BooleanField()
     costo = models.FloatField(default=None)
-    fecha = models.DateField(auto_now_add=True)
+    fecha = models.DateTimeField(auto_now_add=True)
     id_inventario = models.ForeignKey(Inventario, on_delete= models.CASCADE, db_column='id_inventario')    
 
     class Meta:
