@@ -10,10 +10,7 @@ from django.template.loader import get_template
 # Create your views here.
 from apps.personas.models import Departamento
 from apps.personas.models import Empleado
-
-from apps.reportes.models import Art
-from apps.reportes.models import Requision
-from apps.reportes.models import ReqArticulo
+from apps.articulos.models import Articulo
 from django.db import connection
 
 from datetime import datetime
@@ -26,7 +23,7 @@ class reporteArtDepto(View):
             context = {
             'titulo': 'esto es un pdf',
             }
-            requisiciones = Art.objects.raw('SELECT ID_DEPARTAMENTO AS ID, NOMBRE,SUM( CANTIDAD_PEDIDO  ) pedido FROM SISTEMACOMPRAS.REQUISICION INNER JOIN SISTEMACOMPRAS.COMPRAS_REQUESICIONARTICULO ON SISTEMACOMPRAS.COMPRAS_REQUESICIONARTICULO.REQUISICION_ID=SISTEMACOMPRAS.REQUISICION.ID INNER JOIN SISTEMACOMPRAS.DEPARTAMENTO ON SISTEMACOMPRAS.DEPARTAMENTO.ID=SISTEMACOMPRAS.REQUISICION.ID_DEPARTAMENTO GROUP BY ID_DEPARTAMENTO, NOMBRE ORDER BY pedido DESC')
+            requisiciones = Articulo.objects.raw('SELECT ID_DEPARTAMENTO AS ID, NOMBRE,SUM( CANTIDAD_PEDIDO  ) pedido FROM SISTEMACOMPRAS.REQUISICION INNER JOIN SISTEMACOMPRAS.COMPRAS_REQUESICIONARTICULO ON SISTEMACOMPRAS.COMPRAS_REQUESICIONARTICULO.REQUISICION_ID=SISTEMACOMPRAS.REQUISICION.ID INNER JOIN SISTEMACOMPRAS.DEPARTAMENTO ON SISTEMACOMPRAS.DEPARTAMENTO.ID=SISTEMACOMPRAS.REQUISICION.ID_DEPARTAMENTO GROUP BY ID_DEPARTAMENTO, NOMBRE ORDER BY pedido DESC')
             context = {'requisicion': requisiciones
                        }
             html = template.render(context)
