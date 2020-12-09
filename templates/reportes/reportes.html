@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+   <head></head>
+   <body>
+      <h1><b>Articulos solicitados por departamento</b></h1>
+      <br>
+      <table>
+         <thead>
+            <tr>
+               <td>Departamento ID</td>
+               <td>Nombre del Departamento</td>
+               <td>Cantidad de artículos Solicitados</td>
+            </tr>
+         </thead>
+         <tbody>
+            {% if requisicion %}
+            {% for requisiciones in requisicion %}
+            <tr>
+               <td> {{requisiciones.id}}</td>
+               <td> {{requisiciones.nombre}}</td>
+               <td> {{requisiciones.pedido}}</td>
+            </tr>
+            {% endfor %}
+            {% endif %}
+         </tbody>
+      </table>
+   </body>
+</html>

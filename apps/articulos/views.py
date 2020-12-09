@@ -111,9 +111,15 @@ def oferta_create(request):
 
 def oferta_edit(request, id_oferta):
     oferta = Oferta.objects.get(id=id_oferta)
+    articulo = Articulo.objects.all()
+    user = request.user.id
+    empleado = EmpresaProvedora.objects.get(auth_id = user)
     if request.method == 'GET':
 
-        contexto = {'oferta': oferta}
+        contexto = {'oferta': oferta,
+                    'articulos': articulo,
+                    'empleados': empleado
+                    }
         return render(request, 'ofertas/editar.html', contexto)
 
     elif request.method == 'POST':
@@ -132,8 +138,8 @@ def oferta_edit(request, id_oferta):
         oferta.periodo_gracia = periodo_gracia
         oferta.descuento = descuento
         oferta.tipo_entrega = tipo_entrega
-        oferta.id_articulo = id_articulo
-        oferta.iid_provedora = id_provedora
+        oferta.id_articulo_id = id_articulo
+        oferta.id_provedora_id = id_provedora
         oferta.save()
         messages.success(request, '2')
         return redirect('indexOferta')

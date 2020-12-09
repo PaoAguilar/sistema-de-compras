@@ -13,16 +13,29 @@
     <div class="row align-items-center">
         <div class="col-8 offset-2 ">
             <div class="card card-dark">
-
                 <div class="card-header with-border">
                     Ingresar Oferta.
                 </div>
-
                 <div class="card-body">
                     <div class="row">
                         <div class="col-12">
                             <form method="post" name="formulario">
                                 {% csrf_token %}
+                                <div class="row form-group">
+                                    <div class="input-group col-lg-10 offset-lg-1">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text">Articulo</span>
+                                        </div>
+                                        <select class="custom-select" id="id_articulo" name="id_articulo" required>
+                                            <option value="" selected disabled>Elija el Articulo</option>
+                                            {% if articulos %}
+                                            {% for articulo in articulos %}
+                                            <option value="{{ articulo.id }}">{{ articulo.id }}. {{ articulo.nombre }}, {{ articulo.modelo }}</option>
+                                            {% endfor %}
+                                            {% endif %}
+                                        </select>
+                                    </div>
+                                </div>
                                 <div class="row form-group">
                                     <div class="input-group col-lg-10 offset-lg-1 ">
                                         <div class="input-group-prepend">
@@ -50,7 +63,7 @@
                                 <div class="row form-group">
                                     <div class="input-group col-lg-10 offset-lg-1 ">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">Periodo de Gracia</span>
+                                            <span class="input-group-text">Periodo de Gracia (En Dias)</span>
                                         </div>
                                         <input type="number" min="0" class="form-control" id="periodo_gracia" name="periodo_gracia" placeholder="Ingrese el Periodo de Gracia de la Oferta" required>
                                     </div>
@@ -58,7 +71,7 @@
                                 <div class="row form-group">
                                     <div class="input-group col-lg-10 offset-lg-1 ">
                                         <div class="input-group-prepend">
-                                            <span class="input-group-text">Descuento</span>
+                                            <span class="input-group-text">Descuento %</span>
                                         </div>
                                         <input type="number" max="100" min="0" class="form-control" id="descuento" name="descuento" placeholder="Ingrese el Descuento de la Oferta" required>
                                     </div>
@@ -81,38 +94,18 @@
                                     </div>
                                 </div>
                                 <div class="row form-group">
-                                    <div class="input-group col-lg-10 offset-lg-1">
-                                        <div class="input-group-prepend">
-                                            <span class="input-group-text">Articulo</span>
-                                        </div>
-                                        <select class="custom-select" id="id_articulo" name="id_articulo" required>
-                                            <option value="" selected disabled>Elija el Articulo</option>
-                                            {% if articulos %}
-                                            {% for articulo in articulos %}
-                                            <option value="{{ articulo.id }}">{{ articulo.id }}. {{ articulo.nombre }}, {{ articulo.modelo }}</option>
-                                            {% endfor %}
-                                            {% endif %}
-                                        </select>
-                                    </div>
-                                </div>
-
-                                <div class="row form-group">
                                     <div class="input-group col-lg-10 offset-lg-1 ">
                                         <div class="input-group-prepend">
                                             <span class="input-group-text">Proveedor</span>
                                         </div>
                                         <select class="custom-select" id="id_provedora" name="id_provedora" required>
-                                            <option value="" selected disabled>Proveedor</option>
-                                            <option value="{{ empleados.id }}">{{ empleados.id }}. {{ empleados.nombre }}</option>
+                                            <option value="{{ empleados.id }}" selected>{{ empleados.id }}. {{ empleados.nombre }}</option>
                                         </select>
                                     </div>
                                 </div>
-
-
                             </form>
                         </div>
                     </div>
-
                     <div class="row">
                         <div class="col-lg-4 offset-lg-7 text-right">
                             <a href="{% url 'indexOferta' %}" role="button" class="btn btn-danger">Cancelar</a>

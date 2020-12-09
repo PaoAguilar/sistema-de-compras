@@ -41,13 +41,13 @@
                                 <thead class="bg-secondary">
                                     <tr>
                                     	<td>No</td>
+                                        <td>Articulo</td>
                                         <td>Precio</td>
                                         <td>Inicio Oferta</td>
                                         <td>Fin Oferta</td>
                                         <td>Periodo de Gracia</td>
-                                        <td>Descuento %</td>
+                                        <td>Descuento</td>
                                         <td>Tipo Entrega</td>
-                                        <td>Articulo</td>
                                         <td>Proveedor</td>
                                         <td>Opciones</td>                                        
                                     </tr>
@@ -57,13 +57,13 @@
                                     {% for ofertasregistradas in ofertas %}
                                     <tr>
                                         <td> {{ ofertasregistradas.id }}</td>
+                                        <td> {{ ofertasregistradas.id_articulo }}</td>
                                         <td> {{ ofertasregistradas.precio }}</td>
                                         <td> {{ ofertasregistradas.fecha_inicio }}</td>
                                         <td> {{ ofertasregistradas.fecha_fin }}</td>
-                                        <td> {{ ofertasregistradas.periodo_gracia }}</td>
-                                        <td> {{ ofertasregistradas.descuento }}</td>
+                                        <td> {{ ofertasregistradas.periodo_gracia }} Días</td>
+                                        <td> {{ ofertasregistradas.descuento }}  %</td>
                                         <td> {{ ofertasregistradas.tipo_entrega }}</td>
-                                        <td> {{ ofertasregistradas.id_articulo }}</td>
                                         <td> {{ ofertasregistradas.id_provedora }}</td>
                                         <td>
                                             <div class="btn-group">

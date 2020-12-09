@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html>
+<head>
+</head>
+<body>
+	<h1><b>Precios vigentes de artículos por proveedor</b></h1>
+    <br>
+	  <table>
+	 <thead>
+	    <tr>
+	       <td>Proveedor</td>
+	       <td>Articulo</td>
+	       <td>Marca</td>
+	       <td>Modelo</td>
+	       <td>Precio</td>
+	       <td>Inico de Oferta</td>  
+	       <td>Fin de Oferta</td>
+	    </tr>
+	 </thead>
+	 <tbody>
+	    {% if articulo %}
+	    {% for articulos in articulo %}
+	    {% if fecha >= articulos.fecha_inicio and fecha <= articulos.fecha_fin %}
+	    <tr>
+	       <td> {{articulos.nombre}}</td>
+	       <td> {{articulos.articulos}}</td>
+	       <td> {{articulos.marca}}</td>
+	       <td> {{articulos.modelo}}</td>
+	       <td> {{articulos.precio}}</td>
+	       <td> {{articulos.fecha_inicio}}</td>
+	       <td> {{articulos.fecha_fin}}</td>
+	    </tr>
+	    {% endif %}
+	    {% endfor %}
+	    {% endif %}
+	 </tbody>
+	</table>
+</body>
+</html>
