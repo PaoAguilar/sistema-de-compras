@@ -3,40 +3,34 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.urls import reverse_lazy
 from django.views import View
 from xhtml2pdf import pisa
-#import os
-#from django.conf import settings
-#from django.template import Context
+from django.db.models.aggregates import Sum
+from django.db.models import Sum
+
 from django.template.loader import get_template
 # Create your views here.
-from apps.articulos.models import Articulo
 from apps.personas.models import Departamento
 from apps.personas.models import Empleado
 
+from apps.reportes.models import Art
+from apps.reportes.models import Requision
+from apps.reportes.models import ReqArticulo
 from django.db import connection
+
 
 class reporteArtDepto(View):
     def get(self, request, *args, **kwargs):
-        try:
+        
             template = get_template('reportes/reportes.html')
             context = {
             'titulo': 'esto es un pdf',
-
             }
-            #con django
-            articulos_solicitados = Departamento.objects.all()
-            #cursor = connection.cursor()
-            #cursor.execute('''SELECT * FROM departamento''')
-            #cursor.execute('''SELECT count(*) FROM people_person''')
-            #articulos_solicitados = cursor.fetchone()
-            context = {'articulos': articulos_solicitados}
+            requisiciones = Art.objects.raw('SELECT ID_DEPARTAMENTO AS ID, NOMBRE,SUM( CANTIDAD_PEDIDO  ) pedido FROM SISTEMACOMPRAS.REQUISICION INNER JOIN SISTEMACOMPRAS.COMPRAS_REQUESICIONARTICULO ON SISTEMACOMPRAS.COMPRAS_REQUESICIONARTICULO.REQUISICION_ID=SISTEMACOMPRAS.REQUISICION.ID INNER JOIN SISTEMACOMPRAS.DEPARTAMENTO ON SISTEMACOMPRAS.DEPARTAMENTO.ID=SISTEMACOMPRAS.REQUISICION.ID_DEPARTAMENTO GROUP BY ID_DEPARTAMENTO, NOMBRE ORDER BY pedido DESC')
+            context = {'requisicion': requisiciones
+                       }
             html = template.render(context)
             response: HttpResponse = HttpResponse(content_type='application/pdf')
-            #response['Content-Disposition'] = 'attachment; filename="reporte1.pdf"'
             pisa_status = pisa.CreatePDF(html, dest=response)
             return response
-        except:
-            pass
-            return HttpResponseRedirect(reverse_lazy('home'))
 
 
 class reporteArtEmple(View):
@@ -66,28 +60,18 @@ class reporteArtEmple(View):
 
 class reporteArtProvee(View):
     def get(self, request, *args, **kwargs):
-        try:
             template = get_template('reportes/reporte3.html')
             context = {
             'titulo': 'esto es un pdf',
-
             }
-            #con django
-            articulos_solicitados = Departamento.objects.all()
-            #cursor = connection.cursor()
-            #cursor.execute('''SELECT * FROM departamento''')
-            #cursor.execute('''SELECT count(*) FROM people_person''')
-            #articulos_solicitados = cursor.fetchone()
-            context = {'articulos': articulos_solicitados}
+            
+            articulos = Art.objects.raw('SELECT a.ID AS ID, ep.NOMBRE, a.nombre AS articulos, a.marca,a.modelo, o.PRECIO FROM OFERTA o, ARTICULO a, "EMPRESA PROVEEDORA" ep WHERE o.ID_ARTICULOS=a.ID AND o.ID_PROVEDORA=ep.ID')
+            context = {'articulo': articulos}
             html = template.render(context)
             response: HttpResponse = HttpResponse(content_type='application/pdf')
             #response['Content-Disposition'] = 'attachment; filename="reporte1.pdf"'
             pisa_status = pisa.CreatePDF(html, dest=response)
             return response
-        except:
-            pass
-            return HttpResponseRedirect(reverse_lazy('home'))
-
 
 class reporteOrdenCompra(View):
     def get(self, request, *args, **kwargs):

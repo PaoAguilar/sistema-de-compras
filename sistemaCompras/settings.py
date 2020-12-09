@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'apps.compras',
     'apps.articulos',
     'apps.usuarios',
+    'apps.reportes',
     'django_seed',
 ]
 

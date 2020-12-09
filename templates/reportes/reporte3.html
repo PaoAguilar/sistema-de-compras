@@ -5,5 +5,32 @@
 <body>
 	<h1><b>Precios vigentes de artículos por proveedor</b></h1>
     <br>
+	  <table>
+	 <thead>
+	    <tr>
+	       <td>Proveedor</td>
+	       <td>Articulo</td>
+	       <td>Marca</td>
+	       <td>Modelo</td>
+	       <td>Precio</td>
+
+	    </tr>
+	 </thead>
+	 <tbody>
+	    {% if articulo %}
+	    {% for articulos in articulo %}
+	    <tr>
+	       <td> {{articulos.nombre}}</td>
+	       <td> {{articulos.articulos}}</td>
+	       <td> {{articulos.marca}}</td>
+	       <td> {{articulos.modelo}}</td>
+	       <td> {{articulos.precio}}</td>
+
+
+	    </tr>
+	    {% endfor %}
+	    {% endif %}
+	 </tbody>
+	</table>
 </body>
 </html>
