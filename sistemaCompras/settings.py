@@ -82,12 +82,9 @@ WSGI_APPLICATION = 'sistemaCompras.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.oracle',
-<<<<<<< HEAD
         'NAME': 'localhost/ORCLCDB.localdomain',
         'USER': 'sistema',
         'PASSWORD': 'localhost',
-=======
->>>>>>> OrdenCompra
     }
 }
 

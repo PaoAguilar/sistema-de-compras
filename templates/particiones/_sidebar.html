@@ -59,8 +59,9 @@
             </ul>
           </li>
           {%endif%}
-          {% if perms.personas.permisos_general %}
-          <li class="nav-header">OPCIONES</li>
+        
+
+            {% if perms.personas.permisos_requisicion %}
             <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -69,7 +70,6 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            {% if perms.personas.permisos_requisicion %}
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'indexRequision' %}" class="nav-link">
@@ -78,8 +78,19 @@
                 </a>
               </li>
             </ul>
-            {%endif%}
-            {% if perms.personas.permisos_autorizar %}
+          </li>
+          {%endif%}
+   
+
+          {% if perms.personas.permisos_general %}
+         <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Requisicion de compra
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'aprobarRequision' %}" class="nav-link">
@@ -96,9 +107,13 @@
                 </a>
               </li>
             </ul>
-             {%endif%}
+            
           </li>
-          {%endif%}
+          {%endif%}  
+
+
+
+
           {% if perms.personas.permisos_compra %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -126,7 +141,8 @@
             </ul>
           </li>
          {%endif%}
-         {% if perms.personas.permisos_general2 %}
+          
+          {% if perms.personas.permisos_inventario %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -135,7 +151,6 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
-            {% if perms.empleado.permisos_articulo %}
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'indexArticulo' %}" class="nav-link">
@@ -144,8 +159,19 @@
                 </a>
               </li>
             </ul>
-            {%endif%}
-            {% if perms.personas.permisos_oferta %}
+          </li>
+          {%endif%}
+
+          {% if perms.personas.permisos_oferta %}
+          <li class="nav-item has-treeview">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-file-alt"></i>
+              <p>
+                Modulo de Articulos
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'indexOferta' %}" class="nav-link">
@@ -154,10 +180,11 @@
                 </a>
               </li>
             </ul>
-            {%endif%}
           </li>
-          
           {%endif%}
+
+          
+          
           {% if perms.personas.permisos_control %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
