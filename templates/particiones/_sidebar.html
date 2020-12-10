@@ -23,7 +23,7 @@
         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
-          {% if perms.empleado.permisos_control %}
+          {% if perms.personas.permisos_control %}
           <li class="nav-item has-treeview menu-open">
             <a href="#" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
@@ -59,6 +59,7 @@
             </ul>
           </li>
           {%endif%}
+          {% if perms.personas.permisos_general %}
           <li class="nav-header">OPCIONES</li>
             <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
@@ -68,6 +69,7 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            {% if perms.personas.permisos_requisicion %}
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'indexRequision' %}" class="nav-link">
@@ -76,7 +78,8 @@
                 </a>
               </li>
             </ul>
-
+            {%endif%}
+            {% if perms.personas.permisos_autorizar %}
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'aprobarRequision' %}" class="nav-link">
@@ -93,8 +96,10 @@
                 </a>
               </li>
             </ul>
+             {%endif%}
           </li>
-
+          {%endif%}
+          {% if perms.personas.permisos_compra %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -120,7 +125,8 @@
               </li>
             </ul>
           </li>
-
+         {%endif%}
+         {% if perms.personas.permisos_general2 %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -129,6 +135,7 @@
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
+            {% if perms.empleado.permisos_articulo %}
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'indexArticulo' %}" class="nav-link">
@@ -137,7 +144,8 @@
                 </a>
               </li>
             </ul>
-
+            {%endif%}
+            {% if perms.personas.permisos_oferta %}
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="{% url 'indexOferta' %}" class="nav-link">
@@ -146,7 +154,11 @@
                 </a>
               </li>
             </ul>
+            {%endif%}
           </li>
+          
+          {%endif%}
+          {% if perms.personas.permisos_control %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -180,6 +192,8 @@
               </li>
             </ul>
           </li>
+          {%endif%}
+          {% if perms.personas.permisos_inventario %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -199,6 +213,9 @@
             
             
           </li>
+          {%endif%}
+
+          {% if perms.personas.permisos_reportes %}
           <li class="nav-item has-treeview">
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-file-alt"></i>
@@ -258,6 +275,7 @@
             </ul>
           </li>
         </ul>
+        {%endif%}
       </nav>
       <!-- /.sidebar-menu -->
     </div>

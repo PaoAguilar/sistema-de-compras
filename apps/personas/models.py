@@ -74,7 +74,16 @@ class Empleado(models.Model):
         verbose_name_plural = 'Empleados'
         permissions = [
             ('usuarios_control', 'Manejo de los usuarios'),
-            ('permisos_control', 'Manejo de los permisos')
+            ('permisos_control', 'Manejo de los permisos'),
+            ('permisos_requisicion', 'Crear Requisiciones'),
+            ('pemisos_autorizar', 'Autorizar Requisiones'),
+            ('permisos_articulo', 'Gestionar articulos'),
+            ('permisos_oferta', 'Gestionar oferta'),
+            ('permisos_compra', 'Gestionar orden de compra'),
+            ('permisos_inventario', 'Gestionar inventario'),
+            ('permisos_reportes', 'Gestionar reportes'),
+            ('permisos_general', 'General'),
+            ('permisos_general2', 'General2')
         ]
 
 
@@ -94,7 +103,9 @@ class EmpresaProvedora(models.Model):
         db_table = 'Empresa Proveedora'
         verbose_name = 'Empresa Provedora'
         verbose_name_plural = 'Empresa Proveedora'
-        default_permissions = []
+        permissions = [
+            ('permisos_ofertas', 'Gestionar oferta')
+            ]
 
     def __str__(self):
         return '%s' % (self.nombre)

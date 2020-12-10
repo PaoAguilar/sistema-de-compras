@@ -9,6 +9,7 @@ from django.contrib.auth import login, authenticate, REDIRECT_FIELD_NAME
 from django.contrib.messages.views import SuccessMessageMixin
 from django.urls import reverse_lazy
 from django.contrib.auth.models import User, Group, Permission
+from django.contrib.auth.decorators import permission_required
 
 from .forms import(
     SignUpForm,
@@ -62,6 +63,7 @@ class SignUpView(VisitaView, FormView):
             messages.success(request, _('Te has registrado correctamente!'))
 
         return redirect('login')
+
 
 class UserList(ListView):
     model = User
