@@ -1,6 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
+   <style>
+         table {
+         font-family: arial, sans-serif;
+         border-collapse: collapse;
+         width: 100%;
+         }
+         td, th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 4px;
+         text-align: center;
+         }
+         tr:nth-child(even) {
+         background-color: #dddddd;
+         }
+         .footer {
+         position: fixed;
+         left: 0;
+         bottom: 0;
+         width: 100%;
+         text-align: center;
+         }
+         h1{position: fixed;
+         left: 0;
+         bottom: 0;
+         width: 100%;
+         text-align: center;
+         }
+      </style>
 </head>
 <body>
 	<h1><b>Reporte de inventario</b></h1>
@@ -8,11 +37,11 @@
     <table class="table table-bordered">
          <thead>
             <tr>
-               <td>Articulo</td>
-               <td>Marca</td>
-               <td>Modelo</td>
-               <td>Existencia</td>
-               <td>Costo Promedio</td>
+               <td><h2>Articulo</h2></td>
+               <td><h2>Marca</h2></td>
+               <td><h2>Modelo</h2></td>
+               <td><h2>Existencia</h2></td>
+               <td><h2>Costo Promedio</h2></td>
             </tr>
          </thead>
          <tbody>
@@ -29,5 +58,9 @@
             {% endif %}
          </tbody>
       </table>
+      <br><br>
+      <div class="footer">
+         <p>Sistema De Compras, TOO; {{fecha}}</p>
+      </div>
 </body>
 </html>
