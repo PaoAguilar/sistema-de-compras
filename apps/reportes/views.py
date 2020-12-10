@@ -68,7 +68,7 @@ class reporteArtProvee(View):
             }
             
             
-            articulos = Articulo.objects.raw('SELECT a.ID AS ID,ep.NOMBRE, a.nombre, a.marca,a.modelo, o.PRECIO, o.FECHA_FIN FROM OFERTA o, ARTICULO a, "EMPRESA PROVEEDORA" ep WHERE o.ID_ARTICULOS=a.ID AND o.ID_PROVEDORA=ep.ID')
+            articulos = Articulo.objects.raw('SELECT a.ID AS ID, ep.NOMBRE, a.nombre, a.marca,a.modelo, o.PRECIO, o.FECHA_INICIO, o.FECHA_FIN FROM OFERTA o, ARTICULO a, "EMPRESA PROVEEDORA" ep WHERE o.ID_ARTICULOS=a.ID AND o.ID_PROVEDORA=ep.ID')
 
             fechas = datetime.now()
             context = {'articulo': articulos, 'fecha': fechas}
