@@ -5,5 +5,30 @@
 <body>
 	<h1><b>Reporte de inventario</b></h1>
     <br>
+    <table class="table table-bordered">
+         <thead>
+            <tr>
+               <td>Articulo</td>
+               <td>Marca</td>
+               <td>Modelo</td>
+               <td>Existencia</td>
+               <td>Costo Promedio</td>
+            </tr>
+         </thead>
+         <tbody>
+            {% if orden %}
+            {% for ordenes in orden %}
+            <tr>
+               <td> {{ordenes.nombre}}</td>
+               <td> {{ordenes.precio}}</td>
+               <td> {{ordenes.cuenta}}</td>
+               <td> {{ordenes.existencia}}</td>
+               <td> {{ordenes.costo_promedio}}</td>
+
+            </tr>
+            {% endfor %}
+            {% endif %}
+         </tbody>
+      </table>
 </body>
 </html>
