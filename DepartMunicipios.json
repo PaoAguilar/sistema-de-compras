@@ -276,8 +276,28 @@
     {"model":"personas.Municipio", "pk":260,"fields":{"departamento_id_id": 14,"nombreMunicipio": "Santa Maria"}},
     {"model":"personas.Municipio", "pk":261,"fields":{"departamento_id_id": 14,"nombreMunicipio": "Santiago de Maria"}},
     {"model":"personas.Municipio", "pk":262,"fields":{"departamento_id_id": 14,"nombreMunicipio": "Tecapan"}},
-    {"model":"personas.Municipio", "pk":263,"fields":{"departamento_id_id": 14,"nombreMunicipio": "Usulutan"}}
+    {"model":"personas.Municipio", "pk":263,"fields":{"departamento_id_id": 14,"nombreMunicipio": "Usulutan"}},
     
-    
+    {"model":"articulos.Inventario", "pk":1,"fields":{"id_articulo_id": 1,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":2,"fields":{"id_articulo_id": 2,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":3,"fields":{"id_articulo_id": 3,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":4,"fields":{"id_articulo_id": 4,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":5,"fields":{"id_articulo_id": 5,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":6,"fields":{"id_articulo_id": 6,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":7,"fields":{"id_articulo_id": 7,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":8,"fields":{"id_articulo_id": 8,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":9,"fields":{"id_articulo_id": 9,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":10,"fields":{"id_articulo_id": 10,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":11,"fields":{"id_articulo_id": 11,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":12,"fields":{"id_articulo_id": 12,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":13,"fields":{"id_articulo_id": 13,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":14,"fields":{"id_articulo_id": 14,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":15,"fields":{"id_articulo_id": 15,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":16,"fields":{"id_articulo_id": 16,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":17,"fields":{"id_articulo_id": 17,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":18,"fields":{"id_articulo_id": 18,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":19,"fields":{"id_articulo_id": 19,"existencia":0, "costo_promedio":0.0 }},
+    {"model":"articulos.Inventario", "pk":20,"fields":{"id_articulo_id": 20,"existencia":0, "costo_promedio":0.0 }}
+
     
     ]
