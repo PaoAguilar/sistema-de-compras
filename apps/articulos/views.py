@@ -212,15 +212,15 @@ def movimiento_eliminar(request, id_movimiento):
         existenciaActual = inventario.existencia
         costoActual = inventario.costo_promedio
 
-        if(movimiento.tipo == 1):
-            inventario.existencia = inventario.existencia - movimiento.cantidad
-            inventario.costo_promedio = ((existenciaActual*costoActual)-(movimiento.cantidad*movimiento.costo))/inventario.existencia
+        if(movimiento.tipo == 0):
+            inventario.existencia = inventario.existencia + movimiento.cantidad
+            inventario.costo_promedio = ((existenciaActual*costoActual)+(movimiento.cantidad*movimiento.costo))/inventario.existencia
         else:
-            if(inventario.existencia - movimiento.cantidad >= 0 ):
-                inventario.existencia = inventario.existencia + movimiento.cantidad
-                inventario.costo_promedio = ((existenciaActual*costoActual)+(movimiento.cantidad*movimiento.costo))/inventario.existencia
+            if(inventario.existencia - movimiento.cantidad > 0 ):
+                inventario.existencia = inventario.existencia - movimiento.cantidad
+                inventario.costo_promedio = ((existenciaActual*costoActual)-(movimiento.cantidad*movimiento.costo))/inventario.existencia
             else:
-                messages.error(request, 'EXISTENCIA 0')
+                messages.warning(request, 'EXISTENCIA 0')
                 return redirect('indexInventario')
         inventario.save()
         movimiento.delete()
