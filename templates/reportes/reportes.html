@@ -1,15 +1,47 @@
 <!DOCTYPE html>
 <html>
-   <head></head>
+   <head>
+      <style>
+         table {
+         font-family: arial, sans-serif;
+         border-collapse: collapse;
+         width: 100%;
+         }
+         td, th {
+         border: 1px solid #dddddd;
+         text-align: left;
+         padding: 4px;
+         text-align: center;
+         }
+         tr:nth-child(even) {
+         background-color: #dddddd;
+         }
+         .footer {
+         position: fixed;
+         left: 0;
+         bottom: 0;
+         width: 100%;
+         text-align: center;
+         }
+         h1{position: fixed;
+         left: 0;
+         bottom: 0;
+         width: 100%;
+         text-align: center;
+         }
+      </style>
+   </head>
    <body>
+      <br>
       <h1><b>Articulos solicitados por departamento</b></h1>
       <br>
       <table>
          <thead>
             <tr>
-               <td>Departamento ID</td>
-               <td>Nombre del Departamento</td>
-               <td>Cantidad de artículos Solicitados</td>
+               <td><h2>Departamento ID<h2></td>
+               <td><h2>Nombre del Departamento<h2></td>
+               <td><h2>Cantidad de artículos Solicitados<h2>
+               </td>
             </tr>
          </thead>
          <tbody>
@@ -24,5 +56,9 @@
             {% endif %}
          </tbody>
       </table>
+      <br><br>
+      <div class="footer">
+         <p>Sistema De Compras, TOO; {{fecha}}</p>
+      </div>
    </body>
 </html>

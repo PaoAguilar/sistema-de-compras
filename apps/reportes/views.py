@@ -27,7 +27,8 @@ class reporteArtDepto(View):
             'titulo': 'esto es un pdf',
             }
             requisiciones = Articulo.objects.raw('SELECT ID_DEPARTAMENTO AS ID, NOMBRE, SUM( CANTIDAD_PEDIDO  ) pedido FROM REQUISICION INNER JOIN COMPRAS_REQUESICIONARTICULO ON COMPRAS_REQUESICIONARTICULO.REQUISICION_ID=REQUISICION.ID INNER JOIN DEPARTAMENTO ON DEPARTAMENTO.ID=REQUISICION.ID_DEPARTAMENTO GROUP BY ID_DEPARTAMENTO, NOMBRE ORDER BY pedido DESC;')
-            context = {'requisicion': requisiciones
+            fechas = datetime.now()
+            context = {'requisicion': requisiciones, 'fecha': fechas
                        }
             html = template.render(context)
             response: HttpResponse = HttpResponse(content_type='application/pdf')
@@ -66,10 +67,7 @@ class reporteArtProvee(View):
             context = {
             'titulo': 'esto es un pdf',
             }
-            
-            
-            articulos = Articulo.objects.raw('SELECT a.ID AS ID,ep.NOMBRE, a.nombre, a.marca,a.modelo, o.PRECIO, o.FECHA_FIN FROM OFERTA o, ARTICULO a, "EMPRESA PROVEEDORA" ep WHERE o.ID_ARTICULOS=a.ID AND o.ID_PROVEDORA=ep.ID')
-
+            articulos = Articulo.objects.raw('SELECT a.ID AS ID, ep.NOMBRE, a.nombre, a.marca,a.modelo, o.PRECIO, o.FECHA_INICIO, o.FECHA_FIN FROM OFERTA o, ARTICULO a, "EMPRESA PROVEEDORA" ep WHERE o.ID_ARTICULOS=a.ID AND o.ID_PROVEDORA=ep.ID')
             fechas = datetime.now()
             context = {'articulo': articulos, 'fecha': fechas}
             html = template.render(context)
